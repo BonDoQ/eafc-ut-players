@@ -1,0 +1,11 @@
+# EAFC Ultimate team Players API
+
+
+## Description
+This repository is a monorepo for 3 components used to build the API
+
+1) [Directus](https://docs.directus.io/) Headless CMS for Admin / APIs  using 
+2) [NextJs](https://nextjs.org/) UI Application for User Register/Login/Dashboard 
+3) [NULL](NULL) CronJob for Fetching Player updates on regular basis
+4) [PostgreSQL](https://www.postgresql.org/) for Database
+5) [railway.app](https://railway.app) for Deployment
