@@ -1,0 +1,18 @@
+{
+  "name": "directus-starter",
+  "version": "1.0.0",
+  "description": "Directus template for railway app",
+  "scripts": {
+    "start": "CONFIG_PATH='config.js' npx directus start",
+    "start:local": "dotenv -e .env npx directus start",
+    "boostrap:local": "dotenv -e .env npx directus bootstrap"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "directus": "^10.10.3",
+    "dotenv-cli": "^7.4.1",
+    "pg": "^8.11.3"
+  }
+}
