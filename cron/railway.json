@@ -4,6 +4,6 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "yarn cmd:scrap-new-players"
+    "startCommand": "npx playwright install & npm run cmd:scrap-new-players"
   }
 }
