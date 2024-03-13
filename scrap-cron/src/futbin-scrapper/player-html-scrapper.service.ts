@@ -3,6 +3,7 @@ import { webkit } from 'playwright';
 import { KeeperHTMLScrapper, PlayerHTMLScrapper } from './helpers/player-html-mapper';
 import { scrapSleep } from './helpers/utils';
 import { DirectusService } from './directus.service';
+import { DPlayer } from './helpers/directus.schema';
 
 @Injectable()
 export class PlayerHTMLScrapperService {
@@ -18,7 +19,7 @@ export class PlayerHTMLScrapperService {
     try {
       await page.goto(futbinUrl);
 
-      const player = {};
+      const player: Partial<DPlayer> = {};
 
       this.logger.log(`Scraping player ${playerId}, title: ${await page.title()}`);
 
@@ -46,7 +47,7 @@ export class PlayerHTMLScrapperService {
         await this.scrapPlayerHTML(player.id);
         await scrapSleep(50, 150);
       } catch (error) {
-        this.directusService.enrichPlayer(player.id, { updatedAt: new Date() });
+        this.directusService.enrichPlayer(player.id, { date_updated: '$NOW' as any });
         this.logger.error(`Error enriching player ${player.id}`, error);
       }
     }
@@ -54,13 +55,15 @@ export class PlayerHTMLScrapperService {
 
   public async scrapAllPlayersHTML() {
     const limit = 10;
+    this.logger.log(`Enriching all players via HTML Scrapping with chunks of ${limit}`);
 
     const count = await this.directusService.countNonEnrichedPlayers();
+    this.logger.log(`Total non enriched players: ${count}`);
 
     for (let i = 0; i < count; i += limit) {
       const players = await this.directusService.findNonEnrichedPlayers(limit);
       this.logger.log(`Enriching ${players.length} players, currentIndex: ${i}, total: ${count}`);
-      //   await this.scrapBatchPlayersHTML(players);
+      await this.scrapBatchPlayersHTML(players);
     }
   }
 }

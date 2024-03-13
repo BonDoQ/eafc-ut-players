@@ -1,5 +1,6 @@
 import { Page } from 'playwright';
 import selectiveWhitespace from 'selective-whitespace';
+import { DPlayer } from './directus.schema';
 
 const basicParser = (selector: string, type: 'string' | 'number') => async (page: Page) => {
   const value = await page.$eval(selector, (el) => el.textContent);
@@ -54,27 +55,31 @@ const genderParser = async (page: Page) => {
   return value.indexOf('she') > -1 ? 'W' : 'M';
 };
 
-export const PlayerHTMLScrapper = {
+type IPlayerMapper<T> = {
+  [p in keyof T]?: (page: Page) => Promise<any>;
+};
+
+export const PlayerHTMLScrapper: IPlayerMapper<DPlayer> = {
   fullname: basicParser('.table-info tr:has(th:text("Name")) >> .table-row-text', 'string'),
-  club: basicParser('.table-info tr:has(th:text("Club ID")) >> .table-row-text', 'number'),
-  nation: nationParser,
-  league: basicParser('.table-info tr:has(th:text("League ID")) >> .table-row-text', 'number'),
-  overallPace: basicParser('#main-pace-val-0 .stat_val', 'number'),
-  overallShooting: basicParser('#main-shooting-val-0 .stat_val', 'number'),
-  overallPassing: basicParser('#main-passing-val-0 .stat_val', 'number'),
-  overallDribbling: basicParser('#main-dribblingp-val-0 .stat_val', 'number'),
-  overallDefending: basicParser('#main-defending-val-0 .stat_val', 'number'),
-  overallPhysicality: basicParser('#main-heading-val-0 .stat_val', 'number'),
+  club_id: basicParser('.table-info tr:has(th:text("Club ID")) >> .table-row-text', 'number'),
+  nation_id: nationParser,
+  league_id: basicParser('.table-info tr:has(th:text("League ID")) >> .table-row-text', 'number'),
+  overall_pace: basicParser('#main-pace-val-0 .stat_val', 'number'),
+  overall_shooting: basicParser('#main-shooting-val-0 .stat_val', 'number'),
+  overall_passing: basicParser('#main-passing-val-0 .stat_val', 'number'),
+  overall_dribbling: basicParser('#main-dribblingp-val-0 .stat_val', 'number'),
+  overall_defending: basicParser('#main-defending-val-0 .stat_val', 'number'),
+  overall_physicality: basicParser('#main-heading-val-0 .stat_val', 'number'),
   position: basicParser('.pcdisplay-pos>>nth=0', 'string'),
   foot: basicParser('.table-info tr:has(th:text("Foot")) >> .table-row-text', 'string'),
   height: basicParser('.table-info tr:has(th:text("Height")) >> .table-row-text', 'string'),
   weight: basicParser('.table-info tr:has(th:text("Weight")) >> .table-row-text', 'number'),
-  dateOfBirth: dateOfBirthParser,
+  date_of_birth: dateOfBirthParser,
   rating: basicParser('.pcdisplay-rat>>nth=0', 'number'),
-  weakFoot: basicParser('.table-info tr:has(th:text("Weak Foot")) >> .table-row-text', 'number'),
+  weak_foot: basicParser('.table-info tr:has(th:text("Weak Foot")) >> .table-row-text', 'number'),
   skills: basicParser('.table-info tr:has(th:text("Skills")) >> .table-row-text', 'number'),
-  defensiveWorkrate: basicParser('.table-info tr:has(th:text("Def. WR")) >> .table-row-text', 'string'),
-  attackWorkrate: basicParser('.table-info tr:has(th:text("Att. WR")) >> .table-row-text', 'string'),
+  defensive_workrate: basicParser('.table-info tr:has(th:text("Def. WR")) >> .table-row-text', 'string'),
+  attack_workrate: basicParser('.table-info tr:has(th:text("Att. WR")) >> .table-row-text', 'string'),
   acceleration: basicParser('#sub-acceleration-val-0 .stat_val', 'number'),
   aggression: basicParser('#sub-aggression-val-0 .stat_val', 'number'),
   agility: basicParser('#sub-agility-val-0 .stat_val', 'number'),
@@ -104,18 +109,18 @@ export const PlayerHTMLScrapper = {
   vision: basicParser('#sub-vision-val-0 .stat_val', 'number'),
   volleys: basicParser('#sub-volleys-val-0 .stat_val', 'number'),
   composure: basicParser('#sub-composure-val-0 .stat_val', 'number'),
-  acceleRATE: basicParser('.table-info tr:has(th:text("AcceleRATE")) >> .table-row-text >> a', 'string'),
+  accele_rate: basicParser('.table-info tr:has(th:text("AcceleRATE")) >> .table-row-text >> a', 'string'),
   gender: genderParser,
-  playerStyles: playerStylesParser,
-  playerStylesPlus: playerStylesPlusParser,
-  secondaryPosition: secondaryPositionParser,
+  player_styles: playerStylesParser,
+  player_styles_plus: playerStylesPlusParser,
+  secondary_position: secondaryPositionParser,
 };
 
-export const KeeperHTMLScrapper = {
-  overallDiving: basicParser('#main-gkdiving-val-0 .stat_val', 'number'),
-  overallHandling: basicParser('#main-gkhandling-val-0 .stat_val', 'number'),
-  overallKicking: basicParser('#main-gkkicking-val-0 .stat_val', 'number'),
-  overallReflexes: basicParser('#main-gkreflexes-val-0 .stat_val', 'number'),
-  overallSpeed: basicParser('#main-speed-val-0 .stat_val', 'number'),
-  overallPositioning: basicParser('#main-gkpositioning-val-0 .stat_val', 'number'),
+export const KeeperHTMLScrapper: IPlayerMapper<DPlayer> = {
+  gk_overall_diving: basicParser('#main-gkdiving-val-0 .stat_val', 'number'),
+  gk_overall_handling: basicParser('#main-gkhandling-val-0 .stat_val', 'number'),
+  gk_overall_kicking: basicParser('#main-gkkicking-val-0 .stat_val', 'number'),
+  gk_overall_reflexes: basicParser('#main-gkreflexes-val-0 .stat_val', 'number'),
+  gk_overall_speed: basicParser('#main-speed-val-0 .stat_val', 'number'),
+  gk_overall_positioning: basicParser('#main-gkpositioning-val-0 .stat_val', 'number'),
 };

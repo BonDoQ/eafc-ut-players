@@ -16,10 +16,8 @@ export class ScrapNewPlayersCommand extends CommandRunner {
   }
 
   async run(): Promise<void> {
-    this.logger.log('Running the scrapping command');
-    // this.logger.log('Getting new player ids...');
-    // await this.dailyScrapperService.getNewPlayerIds();
-    this.logger.log('Enriching new players...');
+    this.logger.log('Running Command: ScrapNewPlayers');
+    await this.dailyScrapperService.getNewPlayerIds();
     await this.plauerHTMLScrapperService.scrapAllPlayersHTML();
   }
 }

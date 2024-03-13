@@ -30,16 +30,6 @@ export class FutbinScrapperController {
     return this.fullScrapperService.prepareAllPlayerIds();
   }
 
-  @Get('enrich-players')
-  public async enrichAllPlayers() {
-    return this.playerHTMLScrapperService.scrapAllPlayersHTML();
-  }
-
-  @Get('new-players')
-  public async scrapAndUpdateNewPlayers() {
-    return this.dailyScrapperService.getNewPlayerIds();
-  }
-
   @Get('players/:playerId')
   async scrapPlayer(@Param('playerId') playerId: number) {
     return this.playerHTMLScrapperService.scrapPlayerHTML(playerId);

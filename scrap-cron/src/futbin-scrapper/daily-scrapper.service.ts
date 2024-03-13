@@ -44,8 +44,6 @@ export class DailyScrapperService {
       page++;
     }
 
-    this.logger.log(`Scraping new players finished at page: ${page}`);
-
     return page;
   }
 
@@ -63,9 +61,8 @@ export class DailyScrapperService {
 
     this.logger.log(`Scraping new players since: ${lastRun}`);
     const page = await this.scrapNewPlayerIds(new Date(lastRun));
+    await this.directusService.updateScrapStats({ type: 'daily', current_page: page, total_pages: page });
     this.logger.log(`Scraping new players finished at page: ${page}`);
-    // await this.scrapService.updateScrapStats('daily', page, page);
-
     return;
   }
 }
