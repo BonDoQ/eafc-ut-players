@@ -1,0 +1,14 @@
+html,
+body {
+  -webkit-font-smoothing: antialiased !important;
+  font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility;
+  font-display: swap;
+
+  @include transition(all ease-in-out 0.2s);
+}
+
+::selection {
+  background: $primary;
+  color: $white;
+}
