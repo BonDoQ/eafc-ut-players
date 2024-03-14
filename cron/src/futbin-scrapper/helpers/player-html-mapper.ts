@@ -3,16 +3,24 @@ import selectiveWhitespace from 'selective-whitespace';
 import { DPlayer } from './directus.schema';
 
 const basicParser = (selector: string, type: 'string' | 'number') => async (page: Page) => {
-  const value = await page.$eval(selector, (el) => el.textContent);
-  return type === 'string' ? selectiveWhitespace(value) : parseInt(value, 10);
+  try {
+    const value = await page.$eval(selector, (el) => el.textContent);
+    return type === 'string' ? selectiveWhitespace(value) : parseInt(value, 10);
+  } catch (error) {
+    return type === 'string' ? '-1' : -1;
+  }
 };
 
 const dateOfBirthParser = async (page: Page) => {
-  const date = await page.$eval(`.table-info tr:has(th:text("Age")) >> .table-row-text >> a`, (el) =>
-    el.getAttribute('title'),
-  );
-  const [day, month, year] = date.split(' - ')[1].split('-');
-  return `${month}/${day}/${year}`;
+  try {
+    const date = await page.$eval(`.table-info tr:has(th:text("Age")) >> .table-row-text >> a`, (el) =>
+      el.getAttribute('title'),
+    );
+    const [day, month, year] = date.split(' - ')[1].split('-');
+    return `${month}/${day}/${year}`;
+  } catch (error) {
+    return '-1';
+  }
 };
 
 const playerStylesParser = async (page: Page) => {
@@ -44,15 +52,23 @@ const secondaryPositionParser = async (page: Page) => {
 };
 
 const nationParser = async (page: Page) => {
-  const value = await page.$eval('.table-info tr:has(th:text("Nation")) >> .table-row-text >> a', (el) =>
-    el.getAttribute('href'),
-  );
-  return parseInt(value.split('/')[3], 10);
+  try {
+    const value = await page.$eval('.table-info tr:has(th:text("Nation")) >> .table-row-text >> a', (el) =>
+      el.getAttribute('href'),
+    );
+    return parseInt(value.split('/')[3], 10);
+  } catch (error) {
+    return -1;
+  }
 };
 
 const genderParser = async (page: Page) => {
-  const value = await page.$eval('.item-full-info', (el) => el.textContent);
-  return value.indexOf('she') > -1 ? 'W' : 'M';
+  try {
+    const value = await page.$eval('.item-full-info', (el) => el.textContent);
+    return value.indexOf('she') > -1 ? 'W' : 'M';
+  } catch (error) {
+    return '-1';
+  }
 };
 
 type IPlayerMapper<T> = {
