@@ -1,32 +1,40 @@
-const Register = () => {
-  return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-12 col-lg-6 mx-auto">
-          <h2>Create an account</h2>
-          <form method="post" action="register" className="d-flex flex-column gap-3 border p-2 mb-2 p-4 rounded-4 shadow">
+import { useState } from 'react';
+import AuthForm from '@/components/AuthForm';
+import { useRouter, redirect } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 
-            <div>
-              <label className="form-label">Username <span className="text-danger">*</span></label>
-              <input type="text" className="form-control" name="username" />
-            </div>
-
-            <div>
-              <label className="form-label">Email <span className="text-danger">*</span></label>
-              <input type="text" className="form-control" name="email" />
-            </div>
-
-            <div>
-              <label className="form-label">Password <span className="text-danger">*</span></label>
-              <input type="password" className="form-control" name="password" />
-            </div>
-
-            <input type="submit" className="btn btn-primary mt-4" value="Register" />
-          </form>
-        </div>
-      </div>
-    </div>
-  )
+interface Data {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  password?: string;
 }
 
-export default Register
+export default function RegistrationPage() {
+  const [error, setError] = useState('');
+  const handleFormSubmit = async (data: Data) => {
+    const response = await fetch(`/api/auth/register`, {
+      method: 'POST',
+      body: JSON.stringify({
+        ...data,
+      }),
+    });
+    if (response.status === 201) {
+      signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        callbackUrl: '/dashboard',
+      });
+    } else {
+      const { message } = await response.json();
+      setError(message);
+    }
+  };
+
+  return (
+    <>
+      {error && <p>{error}</p>}
+      <AuthForm title="Register here" onSubmit={handleFormSubmit} buttonText="Register" />
+    </>
+  );
+}
