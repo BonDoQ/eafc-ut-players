@@ -1,0 +1,56 @@
+
+### Invalid token
+GET http://localhost:3000/api/v1/players/
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e88011
+
+### Valid Request
+GET http://localhost:3000/api/v1/players/
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+### Invalid token
+GET http://localhost:3000/api/v1/players/20844
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e88011
+
+### Invalid request
+GET http://localhost:3000/api/v1/players/30000
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+### 
+GET http://localhost:3000/api/v1/players/1/20844
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+
+### Valid request
+GET http://localhost:3000/api/v1/players/20844
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+
+
+
+### Valid request
+GET http://localhost:3000/api/v1/leagues
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+###
+GET http://localhost:3000/api/v1/leagues/1
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+
+### Valid request
+GET http://localhost:3000/api/v1/nations
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+###
+GET http://localhost:3000/api/v1/nations/1
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+
+### Valid request
+GET http://localhost:3000/api/v1/clubs
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+###
+GET http://localhost:3000/api/v1/clubs/1
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+
