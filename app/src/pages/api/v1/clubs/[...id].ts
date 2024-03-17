@@ -1,3 +1,33 @@
+/**
+ * Retrieves a club by its ID.
+ *
+ * @swagger
+ * /api/v1/clubs/{id}:
+ *   get:
+ *     summary: Retrieves a club by its ID.
+ *     tags:
+ *       - Clubs
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the club to retrieve.
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Club'
+ *       '404':
+ *         description: Not Found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 import { DClub, directus } from '@/lib/directus';
 import { mapClubFields, mapClubResponse } from '@/lib/response-dto';
 import { getSingularValue } from '@/lib/utils';

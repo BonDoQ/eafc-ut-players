@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AuthForm from '@/components/AuthForm';
+import AuthForm from '@/components/auth-form';
 import { useRouter, redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 

@@ -4,6 +4,34 @@ import { getSingularValue } from '@/lib/utils';
 import { readItem } from '@directus/sdk';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+/**
+ * @swagger
+ * /api/v1/leagues/{id}:
+ *   get:
+ *     summary: Get a league by ID
+ *     tags:
+ *       - League
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the league
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/League'
+ *       '404':
+ *         description: Not Found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const id = getSingularValue(req.query, 'id', 'string');
 

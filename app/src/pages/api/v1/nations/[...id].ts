@@ -4,6 +4,34 @@ import { getSingularValue } from '@/lib/utils';
 import { readItem } from '@directus/sdk';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+/**
+ * @swagger
+ * /api/v1/nations/{id}:
+ *   get:
+ *     tags:
+ *       - Nation
+ *     summary: Get a nation by ID
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID of the nation
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Nation'
+ *       '404':
+ *         description: Not Found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const id = getSingularValue(req.query, 'id', 'string');
 
