@@ -1,4 +1,4 @@
-import { DUser, DUserMetaData } from '@/lib/directus-schema';
+import { DUser, DUserMetaData } from '@/lib/directus';
 import NextAuth, { DefaultSession } from 'next-auth';
 
 interface User extends DUser {

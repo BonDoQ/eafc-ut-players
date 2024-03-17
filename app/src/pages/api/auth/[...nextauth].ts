@@ -1,6 +1,6 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { NextAuthOptions, Session } from 'next-auth';
-import { directus } from '@/lib/directus';
+import { directus, DUserMetaData } from '@/lib/directus';
 import {
   AuthenticationData,
   createDirectus,
@@ -14,7 +14,6 @@ import {
 } from '@directus/sdk';
 import { JWT } from 'next-auth/jwt';
 import NextAuth from 'next-auth/next';
-import { DUserMetaData } from '@/lib/directus-schema';
 
 interface ICredentials {
   email: string;
