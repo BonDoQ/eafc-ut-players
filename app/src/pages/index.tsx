@@ -11,8 +11,8 @@ export default function Home() {
           <div className="col-12">
             <div className="bg-secondary-subtle p-5 rounded-4">
               <h1 className="display-5 fw-bold text-body-emphasis text-center">
-                FUT Api
-                <div className="text-secondary">for FC Ultimate Team 24</div>
+                EAFC API
+                <div className="text-secondary">for Ultimate Team 24</div>
               </h1>
               <div className="d-flex mt-4 gap-3 justify-content-center">
                 {isUser ? (

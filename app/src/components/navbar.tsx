@@ -14,7 +14,7 @@ const Navbar = () => {
           <div className="bg-body-tertiary mt-3 rounded-4 shadow-lg">
             <nav className="navbar navbar-expand-lg ps-4 pe-3 py-3">
               <Link className="navbar-brand" href="/">
-                FUT Api
+                EAFC API
               </Link>
               <button
                 className="navbar-toggler"
@@ -38,11 +38,6 @@ const Navbar = () => {
                     <Link className="nav-link" href="/docs">
                       Documentation
                     </Link>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Pricing
-                    </a>
                   </li>
                   {isUser ? (
                     <>
