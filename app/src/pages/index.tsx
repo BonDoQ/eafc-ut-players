@@ -24,9 +24,9 @@ export default function Home() {
                     Create an account
                   </Link>
                 )}
-                <a href="#" className="btn btn-lg btn-primary-subtle">
+                <Link href="/docs" className="btn btn-lg btn-primary-subtle">
                   API documentation
-                </a>
+                </Link>
               </div>
             </div>
           </div>

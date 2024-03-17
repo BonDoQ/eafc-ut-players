@@ -1,5 +1,209 @@
 import { DClub, DLeague, DNation, DPlayer } from './directus';
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Error:
+ *      type: object
+ *      properties:
+ *        message:
+ *          type: string
+ */
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Player:
+ *     type: object
+ *     properties:
+ *       id:
+ *         type: integer
+ *         description: The unique identifier of the player.
+ *       date_created:
+ *         type: string
+ *         format: date-time
+ *         description: The creation date of the player.
+ *       fullname:
+ *         type: string
+ *         description: The full name of the player.
+ *       overall_pace:
+ *         type: integer
+ *         description: The overall pace of the player.
+ *       overall_shooting:
+ *         type: integer
+ *         description: The overall shooting ability of the player.
+ *       overall_passing:
+ *         type: integer
+ *         description: The overall passing ability of the player.
+ *       overall_dribbling:
+ *         type: integer
+ *         description: The overall dribbling ability of the player.
+ *       overall_defending:
+ *         type: integer
+ *         description: The overall defending ability of the player.
+ *       overall_physicality:
+ *         type: integer
+ *         description: The overall physicality of the player.
+ *       gk_overall_diving:
+ *         type: integer
+ *         description: The overall diving ability of the player as a goalkeeper.
+ *       gk_overall_handling:
+ *         type: integer
+ *         description: The overall handling ability of the player as a goalkeeper.
+ *       gk_overall_kicking:
+ *         type: integer
+ *         description: The overall kicking ability of the player as a goalkeeper.
+ *       gk_overall_reflexes:
+ *         type: integer
+ *         description: The overall reflexes of the player as a goalkeeper.
+ *       gk_overall_speed:
+ *         type: integer
+ *         description: The overall speed of the player as a goalkeeper.
+ *       gk_overall_positioning:
+ *         type: integer
+ *         description: The overall positioning ability of the player as a goalkeeper.
+ *       composure:
+ *         type: integer
+ *         description: The composure of the player.
+ *       volleys:
+ *         type: integer
+ *         description: The volleying ability of the player.
+ *       acceleration:
+ *         type: integer
+ *         description: The acceleration of the player.
+ *       aggression:
+ *         type: integer
+ *         description: The aggression of the player.
+ *       agility:
+ *         type: integer
+ *         description: The agility of the player.
+ *       balance:
+ *         type: integer
+ *         description: The balance of the player.
+ *       ballcontrol:
+ *         type: integer
+ *         description: The ball control ability of the player.
+ *       crossing:
+ *         type: integer
+ *         description: The crossing ability of the player.
+ *       curve:
+ *         type: integer
+ *         description: The curve of the player.
+ *       dribbling:
+ *         type: integer
+ *         description: The dribbling ability of the player.
+ *       finishing:
+ *         type: integer
+ *         description: The finishing ability of the player.
+ *       headingaccuracy:
+ *         type: integer
+ *         description: The heading accuracy of the player.
+ *       interceptions:
+ *         type: integer
+ *         description: The interception ability of the player.
+ *       jumping:
+ *         type: integer
+ *         description: The jumping ability of the player.
+ *       longpassing:
+ *         type: integer
+ *         description: The long passing ability of the player.
+ *       longshots:
+ *         type: integer
+ *         description: The long shot ability of the player.
+ *       marking:
+ *         type: integer
+ *         description: The marking ability of the player.
+ *       penalties:
+ *         type: integer
+ *         description: The penalty taking ability of the player.
+ *       positioning:
+ *         type: integer
+ *         description: The positioning ability of the player.
+ *       reactions:
+ *         type: integer
+ *         description: The reaction ability of the player.
+ *       shortpassing:
+ *         type: integer
+ *         description: The short passing ability of the player.
+ *       freekickaccuracy:
+ *         type: integer
+ *         description: The free kick accuracy of the player.
+ *       shotpower:
+ *         type: integer
+ *         description: The shot power of the player.
+ *       slidingtackle:
+ *         type: integer
+ *         description: The sliding tackle ability of the player.
+ *       sprintspeed:
+ *         type: integer
+ *         description: The sprint speed of the player.
+ *       standingtackle:
+ *         type: integer
+ *         description: The standing tackle ability of the player.
+ *       stamina:
+ *         type: integer
+ *         description: The stamina of the player.
+ *       strength:
+ *         type: integer
+ *         description: The strength of the player.
+ *       vision:
+ *         type: integer
+ *         description: The vision of the player.
+ *       position:
+ *         type: string
+ *         description: The position of the player.
+ *       foot:
+ *         type: string
+ *         description: The preferred foot of the player.
+ *       height:
+ *         type: string
+ *         description: The height of the player.
+ *       weight:
+ *         type: integer
+ *         description: The weight of the player.
+ *       date_of_birth:
+ *         type: string
+ *         format: date-time
+ *         description: The date of birth of the player.
+ *       rating:
+ *         type: integer
+ *         description: The rating of the player.
+ *       weak_foot:
+ *         type: integer
+ *         description: The weak foot rating of the player.
+ *       skills:
+ *         type: integer
+ *         description: The skills of the player.
+ *       defensive_workrate:
+ *         type: string
+ *         description: The defensive work rate of the player.
+ *       attack_workrate:
+ *         type: string
+ *         description: The attack work rate of the player.
+ *       accele_rate:
+ *         type: string
+ *         description: The acceleration rate of the player.
+ *       gender:
+ *         type: string
+ *         description: The gender of the player.
+ *       player_styles:
+ *         type: string
+ *         description: The player styles of the player.
+ *       player_styles_plus:
+ *         type: string
+ *         description: The additional player styles of the player.
+ *       secondary_position:
+ *         type: string
+ *         description: The secondary position of the player.
+ *       club:
+ *         $ref: '#/components/schemas/Club'
+ *       league:
+ *          $ref: '#/components/schemas/League'
+ *       nation_id:
+ *         $ref: '#/components/schemas/Nation'
+ */
 interface PlayerDTO {
   id: number;
   date_created: string;
@@ -65,24 +269,74 @@ interface PlayerDTO {
   nation_id: { id: number | null; name: string | null };
 }
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     League:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *         date_created:
+ *           type: string
+ *         name:
+ *           type: string
+ *         clubs:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Club'
+ */
 interface LeagueDTO {
-  id: number | null;
-  date_created: string | null;
-  name: string | null;
+  id: number;
+  date_created: string;
+  name: string;
   clubs: { id: number; name: string }[] | null;
 }
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Club:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *         date_created:
+ *           type: string
+ *         name:
+ *           type: string
+ *         leagues:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/League'
+ */
 interface ClubDTO {
-  id: number | null;
-  date_created: string | null;
-  name: string | null;
+  id: number;
+  date_created: string;
+  name: string;
   leagues: { id: number; name: string }[] | null;
 }
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Nation:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *         date_created:
+ *           type: string
+ *         name:
+ *           type: string
+ */
 interface NationDTO {
-  id: number | null;
-  date_created: string | null;
-  name: string | null;
+  id: number;
+  date_created: string;
+  name: string;
 }
 
 export const mapPlayerFields: any[] = [

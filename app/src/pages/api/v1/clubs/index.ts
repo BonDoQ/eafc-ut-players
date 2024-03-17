@@ -1,3 +1,25 @@
+/**
+ * Retrieves a list of clubs.
+ *
+ * @swagger
+ * /api/v1/clubs:
+ *   get:
+ *     tags:
+ *       - Clubs
+ *     summary: Retrieves a list of clubs.
+ *     responses:
+ *       '200':
+ *         description: Successful response with a list of clubs.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Club'
+ */
 import { readItems } from '@directus/sdk';
 import { DClub, directus } from '@/lib/directus';
 import { getSingularValue } from '@/lib/utils';

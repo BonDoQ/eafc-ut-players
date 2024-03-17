@@ -4,6 +4,26 @@ import { getSingularValue } from '@/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { mapNationFields, mapNationResponse } from '@/lib/response-dto';
 
+/**
+ * @swagger
+ * /api/v1/nations:
+ *   get:
+ *     summary: Get all nations
+ *     tags:
+ *       - Nation
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 items:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Nation'
+ */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const page = getSingularValue(req.query, 'page', 'number') || 1;
   const limit = getSingularValue(req.query, 'limit', 'string') || 20;
