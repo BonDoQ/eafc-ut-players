@@ -87,7 +87,7 @@ export const PlayerHTMLScrapper: IPlayerMapper<DPlayer> = {
   overall_defending: basicParser('#main-defending-val-0 .stat_val', 'number'),
   overall_physicality: basicParser('#main-heading-val-0 .stat_val', 'number'),
   position: basicParser('.pcdisplay-pos>>nth=0', 'string'),
-  foot: basicParser('.table-info tr:has(th:text("Foot")) >> .table-row-text', 'string'),
+  foot: basicParser('.table-info tr:has(th:text-is("Foot")) >> .table-row-text', 'string'),
   height: basicParser('.table-info tr:has(th:text("Height")) >> .table-row-text', 'string'),
   weight: basicParser('.table-info tr:has(th:text("Weight")) >> .table-row-text', 'number'),
   date_of_birth: dateOfBirthParser,
