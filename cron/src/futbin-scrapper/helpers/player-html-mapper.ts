@@ -71,6 +71,23 @@ const genderParser = async (page: Page) => {
   }
 };
 
+const cardVersionParser = async (page: Page) => {
+  try {
+    const url = await page.$eval('.quick-search-item[data-type="version"] img', (el) => el.getAttribute('src'));
+    return url.split('/')[6].split('.')[0];
+  } catch (error) {
+    return null;
+  }
+};
+
+const imgParser = async (page: Page) => {
+  try {
+    return await page.$eval('.pcdisplay-picture .lazyload', (el) => el.getAttribute('data-src'));
+  } catch (error) {
+    return null;
+  }
+};
+
 type IPlayerMapper<T> = {
   [p in keyof T]?: (page: Page) => Promise<any>;
 };
@@ -80,6 +97,8 @@ export const PlayerHTMLScrapper: IPlayerMapper<DPlayer> = {
   club_id: basicParser('.table-info tr:has(th:text("Club ID")) >> .table-row-text', 'number'),
   nation_id: nationParser,
   league_id: basicParser('.table-info tr:has(th:text("League ID")) >> .table-row-text', 'number'),
+  card_id: cardVersionParser,
+  img: imgParser,
   overall_pace: basicParser('#main-pace-val-0 .stat_val', 'number'),
   overall_shooting: basicParser('#main-shooting-val-0 .stat_val', 'number'),
   overall_passing: basicParser('#main-passing-val-0 .stat_val', 'number'),

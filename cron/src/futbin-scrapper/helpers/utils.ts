@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { webkit } from 'playwright';
 
 const rand = (min: number, max: number) => Math.random() * (max - min) + min;
@@ -54,4 +56,23 @@ export const multiValueHtmlScrapper = async (url: string, selector: string, call
   } finally {
     await browser.close();
   }
+};
+
+export const getFile = async (url: string, params: { [key: string]: string }) => {
+  const defaultFile = new File([readFileSync(resolve(__dirname, '../../../images/default.jpg'))], 'default.jpg', {
+    type: 'image/jpeg',
+  });
+
+  const flagBlob = await fetch(url).then(async (res) => (res.ok ? await res.blob() : defaultFile));
+
+  const formData = new FormData();
+
+  //loop through params keys and values
+  for (const [key, value] of Object.entries(params)) {
+    formData.append(key, value);
+  }
+
+  formData.append('file', flagBlob);
+
+  return formData;
 };

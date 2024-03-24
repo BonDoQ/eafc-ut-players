@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { webkit } from 'playwright';
+import prettyHrtime from 'pretty-hrtime';
 import { KeeperHTMLScrapper, PlayerHTMLScrapper } from './helpers/player-html-mapper';
 import { scrapSleep } from './helpers/utils';
 import { DirectusService } from './directus.service';
@@ -33,7 +34,7 @@ export class PlayerHTMLScrapperService {
         }
       }
 
-      return this.directusService.enrichPlayer(playerId, player);
+      return await this.directusService.enrichPlayer(playerId, { id: playerId, ...player });
     } catch (error) {
       this.logger.error(`Error enriching player ${playerId}`, error);
     } finally {
@@ -61,9 +62,15 @@ export class PlayerHTMLScrapperService {
     this.logger.log(`Total non enriched players: ${count}`);
 
     for (let i = 0; i < count; i += limit) {
+      const start = process.hrtime();
       const players = await this.directusService.findNonEnrichedPlayers(limit);
-      this.logger.log(`Enriching ${players.length} players, currentIndex: ${i}, total: ${count}`);
       await this.scrapBatchPlayersHTML(players);
+      const end = process.hrtime(start);
+      const elapsed = prettyHrtime(end);
+
+      this.logger.log(
+        `Enriched ${players.length} players in ${elapsed}. (offset: ${i + limit}, total: ${count}, left: ${count - i - limit})`,
+      );
     }
   }
 }

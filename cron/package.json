@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -26,8 +26,10 @@
     "@nestjs/config": "^3.2.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "@types/pretty-hrtime": "^1.0.3",
     "nest-commander": "^3.12.5",
     "playwright": "^1.42.1",
+    "pretty-hrtime": "^1.0.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "selective-whitespace": "^1.0.4"

@@ -1,6 +1,11 @@
 export interface DSchema {
   scrap_stats: DScrapStats[];
   players: DPlayer[];
+  nations: DNation[];
+  clubs: DClub[];
+  leagues: DLeague[];
+  leagues_clubs: DLeagueClubConnection[];
+  cards: DCard[];
 }
 
 export interface DPlayer {
@@ -9,6 +14,8 @@ export interface DPlayer {
   club_id?: number;
   nation_id?: number;
   league_id?: number;
+  card_id?: number;
+  img?: string;
   overall_pace?: number;
   overall_shooting?: number;
   overall_passing?: number;
@@ -65,6 +72,48 @@ export interface DPlayer {
   gk_overall_reflexes?: number;
   gk_overall_speed?: number;
   gk_overall_positioning?: number;
+  date_created: 'datetime';
+  date_updated: 'datetime';
+}
+
+export interface DNation {
+  id: number;
+  name: string;
+  flag: string;
+  date_created: 'datetime';
+  date_updated: 'datetime';
+}
+
+export interface DClub {
+  id: number;
+  name: string;
+  flag: string;
+  date_created: 'datetime';
+  date_updated: 'datetime';
+}
+
+export interface DLeague {
+  id: number;
+  name: string;
+  flag: string;
+  date_created: 'datetime';
+  date_updated: 'datetime';
+}
+
+export interface DCard {
+  id: number;
+  name: string;
+  full_name: string;
+  slug: string;
+  img: string;
+  date_created: 'datetime';
+  date_updated: 'datetime';
+}
+
+export interface DLeagueClubConnection {
+  id: number;
+  leagues_id: number;
+  clubs_id: number;
   date_created: 'datetime';
   date_updated: 'datetime';
 }
