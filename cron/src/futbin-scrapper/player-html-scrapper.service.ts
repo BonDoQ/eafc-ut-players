@@ -54,6 +54,21 @@ export class PlayerHTMLScrapperService {
     }
   }
 
+  public async scrapBatchPlayersHTMLWithSpeed(players) {
+    const playersAll = [];
+    for await (const player of players) {
+      try {
+        playersAll.push(this.scrapPlayerHTML(player.id));
+        await scrapSleep(1000, 2500);
+      } catch (error) {
+        this.directusService.enrichPlayer(player.id, { date_updated: '$NOW' as any });
+        this.logger.error(`Error enriching player ${player.id}`, error);
+      }
+    }
+
+    await Promise.all(playersAll);
+  }
+
   public async scrapAllPlayersHTML() {
     const limit = 10;
     this.logger.log(`Enriching all players via HTML Scrapping with chunks of ${limit}`);
