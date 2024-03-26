@@ -1,4 +1,5 @@
 import { useSession } from 'next-auth/react';
+import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Home() {
@@ -6,6 +7,10 @@ export default function Home() {
   const isUser = !!data?.user;
   return (
     <>
+      <Head>
+        <title>EAFC 24 - Home</title>
+      </Head>
+
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">

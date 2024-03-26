@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AuthForm from '@/components/auth-form';
 import { useRouter, redirect } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import Head from 'next/head';
 
 interface Data {
   first_name?: string;
@@ -33,6 +34,10 @@ export default function RegistrationPage() {
 
   return (
     <>
+      <Head>
+        <title>EAFC 24 - Register</title>
+      </Head>
+
       {error && <p>{error}</p>}
       <AuthForm title="Register here" onSubmit={handleFormSubmit} buttonText="Register" />
     </>

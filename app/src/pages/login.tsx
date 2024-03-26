@@ -1,5 +1,6 @@
 import AuthForm from '@/components/auth-form';
 import { signIn } from 'next-auth/react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -34,8 +35,14 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <div>
-      <LoginForm />
-    </div>
+    <>
+      <Head>
+        <title>EAFC 24 - Login</title>
+      </Head>
+
+      <div>
+        <LoginForm />
+      </div>
+    </>
   );
 }
