@@ -15,7 +15,7 @@ const Navbar = () => {
           <div className="bg-body-tertiary mt-3 rounded-4 shadow-lg">
             <nav className="navbar navbar-expand-lg ps-4 pe-3">
               <Link className="navbar-brand" href="/">
-                <Image src="/images/logo.png" alt="logo" width="64" height="50" />
+                <Image src="/images/logo.png" alt="logo" width="80" height="80" />
               </Link>
               <button
                 className="navbar-toggler"
