@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+import Image from 'next/image';
 
 const Navbar = () => {
   const { data } = useSession();
@@ -12,9 +13,9 @@ const Navbar = () => {
       <div className="row">
         <div className="col-12">
           <div className="bg-body-tertiary mt-3 rounded-4 shadow-lg">
-            <nav className="navbar navbar-expand-lg ps-4 pe-3 py-3">
+            <nav className="navbar navbar-expand-lg ps-4 pe-3">
               <Link className="navbar-brand" href="/">
-                EAFC API
+                <Image src="/images/logo.png" alt="logo" width="64" height="50" />
               </Link>
               <button
                 className="navbar-toggler"
@@ -85,3 +86,15 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+{
+  /* <button
+  class="navbar-toggler"
+  type="button"
+  data-toggle="collapse"
+  data-target="#navbarSupportedContent"
+  aria-controls="navbarSupportedContent"
+  aria-expanded="false"
+  aria-label="Toggle navigation"
+/>; */
+}

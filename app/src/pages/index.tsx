@@ -11,9 +11,13 @@ export default function Home() {
           <div className="col-12">
             <div className="bg-secondary-subtle p-5 rounded-4">
               <h1 className="display-5 fw-bold text-body-emphasis text-center">
-                EAFC API
-                <div className="text-secondary">for Ultimate Team 24</div>
+                Welcome to EAFC!
+                <div className="text-secondary">Your Ultimate Team API</div>
               </h1>
+              <div className="text-secondary text-center">
+                Unleash the Power of EAFC Data with seamless API integration, and access to all player data, prices,
+                more for your bots, applications, or tools.
+              </div>
               <div className="d-flex mt-4 gap-3 justify-content-center">
                 {isUser ? (
                   <Link href="/dashboard" className="btn btn-lg btn-primary shadow">

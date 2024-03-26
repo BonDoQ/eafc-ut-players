@@ -21,9 +21,6 @@ export default function Dashboard() {
                 API calls <code className="bg-warning-subtle text-warning px-2 py-1 rounded-2">{apiLimit} / 1000</code>
               </p>
             </div>
-            <a href="#" className="btn btn-sm btn-outline-primary mt-3">
-              Buy more credits
-            </a>
           </div>
         </div>
       </div>
