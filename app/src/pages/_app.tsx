@@ -9,8 +9,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <Meta title="EAFC 24 - " description="API for FC ultimate team 2024" />
       <Navbar />
       <Component {...pageProps} />
+      <GoogleAnalytics gaId="G-X6TT55NYB4" />
     </SessionProvider>
   );
 }
 
 import '@/styles/main.scss';
+import { GoogleAnalytics } from '@next/third-parties/google';
