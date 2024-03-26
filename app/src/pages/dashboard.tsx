@@ -18,7 +18,7 @@ export default function Dashboard() {
                 API token <code className="bg-success-subtle text-success px-2 py-1 rounded-2">{apiToken}</code>
               </p>
               <p>
-                API calls <code className="bg-warning-subtle text-warning px-2 py-1 rounded-2">{apiLimit} / 100</code>
+                API calls <code className="bg-warning-subtle text-warning px-2 py-1 rounded-2">{apiLimit} / 1000</code>
               </p>
             </div>
             <a href="#" className="btn btn-sm btn-outline-primary mt-3">

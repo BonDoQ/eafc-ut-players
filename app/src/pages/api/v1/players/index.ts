@@ -3,6 +3,7 @@ import { DPlayer, directus } from '@/lib/directus';
 import { getSingularValue } from '@/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { mapPlayerFields, mapPlayerResponse } from '@/lib/response-dto';
+import Joi from 'joi';
 
 /**
  * @swagger
@@ -36,9 +37,20 @@ import { mapPlayerFields, mapPlayerResponse } from '@/lib/response-dto';
  *                   items:
  *                     $ref: '#/components/schemas/Player'
  */
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const page = getSingularValue(req.query, 'page', 'number') || 1;
-  const limit = getSingularValue(req.query, 'limit', 'string') || 20;
+  const schema = Joi.object({
+    page: Joi.number().integer().min(1).default(1),
+    limit: Joi.number().integer().min(1).default(20).max(20),
+  });
+
+  const { error, value } = schema.validate(req.query);
+
+  if (error) {
+    return res.status(400).send({ error: error.message });
+  }
+
+  const { page, limit } = value;
 
   const adminAPI = directus(process.env.DIRECTUS_ADMIN_TOKEN);
 
@@ -51,6 +63,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }),
   );
 
-  res.status(200).send({ items: players.map(mapPlayerResponse) });
-  res.end(`Post: all players`);
+  return res.status(200).send({ items: players.map(mapPlayerResponse) });
 }

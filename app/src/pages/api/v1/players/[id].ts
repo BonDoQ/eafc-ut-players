@@ -1,7 +1,7 @@
 import { DPlayer, directus } from '@/lib/directus';
 import { mapPlayerFields, mapPlayerResponse } from '@/lib/response-dto';
-import { getSingularValue } from '@/lib/utils';
 import { readItem } from '@directus/sdk';
+import Joi from 'joi';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /**
@@ -31,11 +31,17 @@ import type { NextApiRequest, NextApiResponse } from 'next';
  *           $ref: '#/components/schemas/Error'
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const id = getSingularValue(req.query, 'id', 'string');
+  const schema = Joi.object({
+    id: Joi.number().required(),
+  });
 
-  if (!id) {
-    return res.status(404).json({ error: 'Not Found' });
+  const { error, value } = schema.validate(req.query);
+
+  if (error) {
+    return res.status(400).send({ error: error.message });
   }
+
+  const { id } = value;
 
   try {
     const adminAPI = directus(process.env.DIRECTUS_ADMIN_TOKEN);

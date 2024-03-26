@@ -3,6 +3,7 @@ import { DLeague, directus } from '@/lib/directus';
 import { getSingularValue } from '@/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { mapLeagueFields, mapLeagueResponse } from '@/lib/response-dto';
+import Joi from 'joi';
 
 /**
  * @swagger
@@ -36,8 +37,17 @@ import { mapLeagueFields, mapLeagueResponse } from '@/lib/response-dto';
  *                     $ref: '#/components/schemas/League'
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const page = getSingularValue(req.query, 'page', 'number') || 1;
-  const limit = getSingularValue(req.query, 'limit', 'string') || 20;
+  const schema = Joi.object({
+    page: Joi.number().integer().min(1).default(1),
+    limit: Joi.number().integer().min(1).max(20).default(20),
+  });
+
+  const { error, value } = schema.validate(req.query);
+  if (error) {
+    return res.status(400).send(error.message);
+  }
+
+  const { page, limit } = value;
 
   const adminAPI = directus(process.env.DIRECTUS_ADMIN_TOKEN);
 

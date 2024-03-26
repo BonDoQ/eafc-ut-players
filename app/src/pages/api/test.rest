@@ -4,7 +4,7 @@ GET http://localhost:3000/api/v1/players/
 X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e88011
 
 ### Valid Request
-GET http://localhost:3000/api/v1/players/
+GET http://localhost:3000/api/v1/players?page=2&limit=1
 X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 
 ### Invalid token
