@@ -1,6 +1,5 @@
 import { DLeague, directus } from '@/lib/directus';
 import { mapLeagueFields, mapLeagueResponse } from '@/lib/response-dto';
-import { getSingularValue } from '@/lib/utils';
 import { readItem } from '@directus/sdk';
 import Joi from 'joi';
 import type { NextApiRequest, NextApiResponse } from 'next';

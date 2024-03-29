@@ -1,5 +1,15 @@
 import { authentication, createDirectus, rest, staticToken } from '@directus/sdk';
 
+export interface DCard {
+  id: number;
+  name: string;
+  full_name: string;
+  img: string;
+  slug: string;
+  date_created: 'datetime';
+  date_updated: 'datetime';
+}
+
 export interface DClub {
   id: number;
   name: string;
@@ -29,6 +39,9 @@ export interface DPlayer {
   club_id: DClub | null;
   nation_id: DNation | null;
   league_id: DLeague | null;
+  card_id: DCard | null;
+  pc_price: number | null;
+  ps_price: number | null;
   overall_pace: number | null;
   overall_shooting: number | null;
   overall_passing: number | null;
@@ -119,6 +132,7 @@ export interface DSchema {
   players: DPlayer[];
   scrap_stats: DScrapStats[];
   user_metadata: DUserMetaData[];
+  cards: DCard[];
 }
 
 export const directus = (token: string | null = null) => {

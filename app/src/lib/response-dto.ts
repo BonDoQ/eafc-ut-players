@@ -1,4 +1,4 @@
-import { DClub, DLeague, DNation, DPlayer } from './directus';
+import { DCard, DClub, DLeague, DNation, DPlayer } from './directus';
 
 /**
  * @swagger
@@ -28,6 +28,12 @@ import { DClub, DLeague, DNation, DPlayer } from './directus';
  *       fullname:
  *         type: string
  *         description: The full name of the player.
+ *       ps_price:
+ *         type: integer
+ *         description: The price of the player on the PlayStation.
+ *       pc_price:
+ *          type: integer
+ *          description: The price of the player on the Xbox.
  *       overall_pace:
  *         type: integer
  *         description: The overall pace of the player.
@@ -197,6 +203,8 @@ import { DClub, DLeague, DNation, DPlayer } from './directus';
  *       secondary_position:
  *         type: string
  *         description: The secondary position of the player.
+ *       card:
+ *        $ref: '#/components/schemas/Card'
  *       club:
  *         $ref: '#/components/schemas/Club'
  *       league:
@@ -208,6 +216,8 @@ interface PlayerDTO {
   id: number;
   date_created: string;
   fullname: string | null;
+  ps_price: number | null;
+  pc_price: number | null;
   overall_pace: number | null;
   overall_shooting: number | null;
   overall_passing: number | null;
@@ -264,9 +274,10 @@ interface PlayerDTO {
   player_styles: string | null;
   player_styles_plus: string | null;
   secondary_position: string | null;
+  card: { id: number | null; name: string | null; img: string | null };
   club: { id: number | null; name: string | null };
-  league_id: { id: number | null; name: string | null };
-  nation_id: { id: number | null; name: string | null };
+  league: { id: number | null; name: string | null };
+  nation: { id: number | null; name: string | null };
 }
 
 /**
@@ -278,8 +289,6 @@ interface PlayerDTO {
  *       properties:
  *         id:
  *           type: number
- *         date_created:
- *           type: string
  *         name:
  *           type: string
  *         clubs:
@@ -289,7 +298,6 @@ interface PlayerDTO {
  */
 interface LeagueDTO {
   id: number;
-  date_created: string;
   name: string;
   clubs: { id: number; name: string }[] | null;
 }
@@ -303,8 +311,6 @@ interface LeagueDTO {
  *       properties:
  *         id:
  *           type: number
- *         date_created:
- *           type: string
  *         name:
  *           type: string
  *         leagues:
@@ -314,7 +320,6 @@ interface LeagueDTO {
  */
 interface ClubDTO {
   id: number;
-  date_created: string;
   name: string;
   leagues: { id: number; name: string }[] | null;
 }
@@ -328,15 +333,32 @@ interface ClubDTO {
  *       properties:
  *         id:
  *           type: number
- *         date_created:
- *           type: string
  *         name:
  *           type: string
  */
 interface NationDTO {
   id: number;
-  date_created: string;
   name: string;
+}
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Card:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *         name:
+ *           type: string
+ *         img:
+ *           type: string
+ */
+interface CardDTO {
+  id: number;
+  name: string;
+  img: string;
 }
 
 export const mapPlayerFields: any[] = [
@@ -347,20 +369,27 @@ export const mapPlayerFields: any[] = [
   'league_id.name',
   'nation_id.id',
   'nation_id.name',
+  'card_id.id',
+  'card_id.full_name',
+  'card_id.img',
 ];
 export const mapPlayerResponse = (player: DPlayer): PlayerDTO => {
   const response: any = {};
 
   (Object.keys(player) as Array<keyof DPlayer>).forEach((key) => {
-    if (key === 'club_id' && player[key]) {
-      response['club'] = player[key];
-    } else if (key === 'nation_id' && player[key]) {
-      response['nation'] = player[key];
-    } else if (key === 'league_id' && player[key]) {
-      response['league'] = player[key];
+    const prop = player[key];
+
+    if (key === 'club_id' && prop) {
+      response['club'] = prop;
+    } else if (key === 'nation_id' && prop) {
+      response['nation'] = prop;
+    } else if (key === 'league_id' && prop) {
+      response['league'] = prop;
+    } else if (key === 'card_id' && prop) {
+      response['card'] = prop;
     } else if (key === 'date_updated') {
     } else {
-      response[key] = player[key];
+      response[key] = prop;
     }
   });
 
@@ -368,30 +397,36 @@ export const mapPlayerResponse = (player: DPlayer): PlayerDTO => {
 };
 
 export const mapClubFields: any[] = ['*', 'leagues.leagues_id.id', 'leagues.leagues_id.name'];
-export const mapClubResponse = ({ id, name, leagues, date_created }: DClub): ClubDTO => {
+export const mapClubResponse = ({ id, name, leagues }: DClub): ClubDTO => {
   return {
     id,
     name,
     leagues: leagues?.map((league: any) => ({ id: league.leagues_id.id, name: league.leagues_id.name })) || [],
-    date_created,
   };
 };
 
 export const mapLeagueFields: any[] = ['*', 'clubs.clubs_id.id', 'clubs.clubs_id.name'];
-export const mapLeagueResponse = ({ id, name, clubs, date_created }: DLeague): LeagueDTO => {
+export const mapLeagueResponse = ({ id, name, clubs }: DLeague): LeagueDTO => {
   return {
     id,
     name,
     clubs: clubs?.map((club: any) => ({ id: club.clubs_id.id, name: club.clubs_id.name })) || [],
-    date_created,
   };
 };
 
 export const mapNationFields: any[] = ['*', 'leagues.leagues_id.id', 'leagues.leagues_id.name'];
-export const mapNationResponse = ({ id, name, date_created }: DNation): NationDTO => {
+export const mapNationResponse = ({ id, name }: DNation): NationDTO => {
   return {
     id,
-    date_created,
     name,
+  };
+};
+
+export const mapCardFields: any[] = ['*'];
+export const mapCardResponse = ({ id, full_name, img }: DCard): CardDTO => {
+  return {
+    id,
+    name: full_name,
+    img: img,
   };
 };

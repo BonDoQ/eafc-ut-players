@@ -1,6 +1,5 @@
 import { readItems } from '@directus/sdk';
 import { DLeague, directus } from '@/lib/directus';
-import { getSingularValue } from '@/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { mapLeagueFields, mapLeagueResponse } from '@/lib/response-dto';
 import Joi from 'joi';
@@ -54,8 +53,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const leagues = await adminAPI.request<DLeague[]>(
     readItems('leagues', {
       fields: mapLeagueFields,
-      limit: +limit,
-      page: +page,
+      limit: limit,
+      page: page,
       sort: '-date_created',
     }),
   );

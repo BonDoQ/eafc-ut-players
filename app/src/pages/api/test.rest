@@ -3,9 +3,6 @@
 GET http://localhost:3000/api/v1/players/
 X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e88011
 
-### Valid Request
-GET http://localhost:3000/api/v1/players?page=2&limit=1
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 
 ### Invalid token
 GET http://localhost:3000/api/v1/players/20844
@@ -24,7 +21,9 @@ X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 GET http://localhost:3000/api/v1/players/20844
 X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 
-
+### Valid Request
+GET http://localhost:3000/api/v1/players?page=2&limit=1
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 
 
 ### Valid request
@@ -50,7 +49,15 @@ GET http://localhost:3000/api/v1/clubs
 X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 
 ###
-GET http://localhost:3000/api/v1/clubs/1
+GET http://localhost:3000/api/v1/clubs/266
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+### Valid request
+GET http://localhost:3000/api/v1/cards
+X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+
+###
+GET http://localhost:3000/api/v1/cards/1
 X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
 
 

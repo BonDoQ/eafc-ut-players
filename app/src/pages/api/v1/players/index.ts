@@ -1,6 +1,5 @@
 import { readItems } from '@directus/sdk';
 import { DPlayer, directus } from '@/lib/directus';
-import { getSingularValue } from '@/lib/utils';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { mapPlayerFields, mapPlayerResponse } from '@/lib/response-dto';
 import Joi from 'joi';
@@ -56,8 +55,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const players = await adminAPI.request<DPlayer[]>(
     readItems('players', {
-      limit: +limit,
-      page: +page,
+      limit: limit,
+      page: page,
       sort: '-date_created',
       fields: mapPlayerFields,
     }),

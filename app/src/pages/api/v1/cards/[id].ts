@@ -1,30 +1,32 @@
-import { DNation, directus } from '@/lib/directus';
-import { mapNationFields, mapNationResponse } from '@/lib/response-dto';
+import { DCard, directus } from '@/lib/directus';
+import { mapCardFields, mapCardResponse } from '@/lib/response-dto';
 import { readItem } from '@directus/sdk';
 import Joi from 'joi';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 /**
+ * Retrieves a card by its ID.
+ *
  * @swagger
- * /api/v1/nations/{id}:
+ * /api/v1/cards/{id}:
  *   get:
+ *     summary: Retrieves a card by its ID.
  *     tags:
- *       - Nation
- *     summary: Get a nation by ID
+ *       - Cards
  *     parameters:
- *       - name: id
- *         in: path
+ *       - in: path
+ *         name: id
  *         required: true
- *         description: ID of the nation
  *         schema:
  *           type: string
+ *         description: The ID of the card to retrieve.
  *     responses:
  *       '200':
  *         description: OK
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Nation'
+ *               $ref: '#/components/schemas/Card'
  *       '404':
  *         description: Not Found
  *         content:
@@ -32,6 +34,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const schema = Joi.object({
     id: Joi.number().required(),
@@ -47,8 +50,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const adminAPI = directus(process.env.DIRECTUS_ADMIN_TOKEN);
-    const nation = await adminAPI.request<DNation>(readItem('nations', id, { fields: mapNationFields }));
-    return res.status(200).json({ item: mapNationResponse(nation) });
+    const card = await adminAPI.request<DCard>(readItem('cards', id, { fields: mapCardFields }));
+    return res.status(200).json({ item: mapCardResponse(card) });
   } catch (error) {
     return res.status(404).json({ error: 'Not Found' });
   }
