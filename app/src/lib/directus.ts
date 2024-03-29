@@ -125,6 +125,10 @@ export interface DScrapStats {
   date_updated: 'datetime';
 }
 
+export interface DConfigs {
+  apiLimit: number;
+}
+
 export interface DSchema {
   clubs: DClub[];
   leagues: DLeague[];
@@ -133,6 +137,7 @@ export interface DSchema {
   scrap_stats: DScrapStats[];
   user_metadata: DUserMetaData[];
   cards: DCard[];
+  configs: DConfigs;
 }
 
 export const directus = (token: string | null = null) => {

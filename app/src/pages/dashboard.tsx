@@ -1,11 +1,16 @@
+import { loadConfigs } from '@/lib/get-configs';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 
-export default function Dashboard() {
+type Props = {
+  totalApiLimit: number;
+};
+
+export default function Dashboard({ totalApiLimit }: Props) {
   const { data } = useSession();
 
-  const apiToken = data?.user?.metadata?.api_token;
-  const apiLimit = data?.user?.metadata?.api_limit;
+  const userApiToken = data?.user?.metadata?.api_token;
+  const userApiLimit = data?.user?.metadata?.api_limit;
   const fullname = `${data?.user?.first_name} ${data?.user?.last_name}`;
   return (
     <>
@@ -21,11 +26,13 @@ export default function Dashboard() {
 
               <div className="mt-4">
                 <p>
-                  API token <code className="bg-success-subtle text-success px-2 py-1 rounded-2">{apiToken}</code>
+                  API token <code className="bg-success-subtle text-success px-2 py-1 rounded-2">{userApiToken}</code>
                 </p>
                 <p>
                   API calls{' '}
-                  <code className="bg-warning-subtle text-warning px-2 py-1 rounded-2">{apiLimit} / 1000</code>
+                  <code className="bg-warning-subtle text-warning px-2 py-1 rounded-2">
+                    {userApiLimit} / {totalApiLimit}
+                  </code>
                 </p>
               </div>
             </div>
@@ -34,4 +41,10 @@ export default function Dashboard() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(): Promise<{ props: Props }> {
+  const { apiLimit } = await loadConfigs();
+
+  return { props: { totalApiLimit: apiLimit } };
 }
