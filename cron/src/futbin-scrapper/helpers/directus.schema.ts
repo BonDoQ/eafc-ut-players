@@ -16,6 +16,8 @@ export interface DPlayer {
   league_id?: number;
   card_id?: number;
   img?: string;
+  pc_price?: number;
+  ps_price?: number;
   overall_pace?: number;
   overall_shooting?: number;
   overall_passing?: number;

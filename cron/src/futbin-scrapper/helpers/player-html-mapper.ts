@@ -159,3 +159,22 @@ export const KeeperHTMLScrapper: IPlayerMapper<DPlayer> = {
   gk_overall_speed: basicParser('#main-speed-val-0 .stat_val', 'number'),
   gk_overall_positioning: basicParser('#main-gkpositioning-val-0 .stat_val', 'number'),
 };
+
+export const getPlayerPrice = async (id: number) => {
+  const headers = {
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept-Language': 'en-US,en;q=0.9',
+    Connection: 'keep-alive',
+    'User-Agent': 'Futbin/6.2.4 (iPhone; iOS 17.4; Scale/3.00)',
+  };
+
+  const url = `https://www.futbin.com/24/getTp?pid=${id}&type=player`;
+  const res = await fetch(url, { headers });
+
+  const { data } = await res.json();
+
+  return {
+    ps: data.p[0],
+    pc: data.p[2],
+  };
+};
