@@ -17,4 +17,4 @@ RUN npx playwright install-deps
 RUN npm run build
 
 
-CMD ["npm", "run", "cmd:scrap-new-players"]
+CMD ["npm", "run", "cmd:daily-scrapper"]

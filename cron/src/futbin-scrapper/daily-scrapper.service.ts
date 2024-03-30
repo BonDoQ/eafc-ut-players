@@ -65,4 +65,30 @@ export class DailyScrapperService {
     this.logger.log(`Scraping new players finished at page: ${page}`);
     return;
   }
+
+  public async scrapNewCardVersions() {
+    this.logger.log('Scraping all card versions from futbin...');
+    const { data } = await fetch('https://www.futbin.org/futbin/api/24/getItemRarities').then((res) => res.json());
+
+    if (!data) {
+      this.logger.error('No Card Versions found');
+      return;
+    }
+
+    const currentCardVersions = await this.directusService.getAllCardVersions();
+
+    const diff = data
+      .map((cardVersion) => ({
+        id: cardVersion.ID,
+        full_name: cardVersion.full_name,
+        name: cardVersion.name,
+        slug: cardVersion.get,
+        img: cardVersion.urls.large,
+      }))
+      .filter((cardVersion) => !currentCardVersions.find((current) => current.id === cardVersion.id));
+
+    await Promise.all(diff.map(async (cardVersion) => await this.directusService.upsertCardVersion(cardVersion)));
+
+    this.logger.log(`${diff.length} Cards Versions updated!`);
+  }
 }

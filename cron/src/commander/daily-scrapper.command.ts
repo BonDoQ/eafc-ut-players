@@ -6,7 +6,7 @@ import { PlayerHTMLScrapperService } from '../futbin-scrapper/player-html-scrapp
 import { MetaScrapperService } from 'src/futbin-scrapper/meta-scrapper.service';
 import { FullScrapperService } from 'src/futbin-scrapper/full-scrapper.service';
 
-@Command({ name: 'scrap-new-players', description: 'A parameter parse' })
+@Command({ name: 'daily-scrapper', description: 'A parameter parse' })
 export class ScrapNewPlayersCommand extends CommandRunner {
   private logger: Logger = LoggerService.getInstance();
 
@@ -23,6 +23,11 @@ export class ScrapNewPlayersCommand extends CommandRunner {
     // await this.metaScrapperService.scrapAndUpdateAllNations();
     // await this.metaScrapperService.scrapAndUpdateAllLeaguesAndClubs();
     // await this.metaScrapperService.scrapAndUpdateAllCardVersions();
+
+    this.logger.log('Running Command: Daily-Scrapper');
+
+    this.logger.log('Running: ScrapingNewCardVersions');
+    await this.dailyScrapperService.scrapNewCardVersions();
 
     this.logger.log('Running Command: ScrapNewPlayers');
     await this.dailyScrapperService.getNewPlayerIds();

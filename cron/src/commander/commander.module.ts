@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ScrapNewPlayersCommand } from './scrap-new-players.command';
+import { ScrapNewPlayersCommand } from './daily-scrapper.command';
 import { FutbinScrapperModule } from '../futbin-scrapper/futbin-scrapper.module';
 import { DirectusService } from '../futbin-scrapper/directus.service';
 import { DailyScrapperService } from '../futbin-scrapper/daily-scrapper.service';

@@ -149,7 +149,7 @@ export class DirectusService {
       }),
     );
   }
-  //start for here
+
   public async enrichPlayer(playerId: number, player: Partial<DPlayer>) {
     if (player.img) {
       const uploadFolderId = '45d0c96c-c19b-4c96-ae18-108977e5f661';
@@ -206,5 +206,9 @@ export class DirectusService {
         );
       }
     }
+  }
+
+  public async getAllCardVersions() {
+    return await this.directusClient.request<DCard[]>(readItems('cards', { fields: ['id'] }));
   }
 }
