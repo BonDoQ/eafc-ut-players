@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
@@ -6,7 +6,7 @@ import Image from 'next/image';
 const Navbar = () => {
   const { data } = useSession();
   const isUser = !!data?.user;
-  const email = data?.user?.email;
+  const img = data?.user?.metadata?.google_img;
 
   return (
     <div className="container">
@@ -47,33 +47,26 @@ const Navbar = () => {
                           Dashboard
                         </Link>
                       </li>
-                      <span className="navbar-text">{email}</span>
+                      {img && (
+                        <li className="nav-item">
+                          <Image className="rounded-circle" src={img} alt="profile" width={38} height={38} />
+                        </li>
+                      )}
                       <li className="nav-item">
-                        <button
-                          className="btn btn btn-outline-light"
-                          onClick={() =>
-                            signOut({
-                              callbackUrl: '/login',
-                            })
-                          }
-                        >
+                        <button className="btn btn btn-outline-light" onClick={() => signOut({ callbackUrl: '/' })}>
                           Logout
                         </button>
                       </li>
                     </>
                   ) : (
-                    <>
-                      <li className="nav-item">
-                        <Link className="nav-link" href="/login">
-                          Login
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link className="btn btn-primary" href="/register">
-                          Create an account
-                        </Link>
-                      </li>
-                    </>
+                    <li className="nav-item">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+                      >
+                        Login with Google
+                      </button>
+                    </li>
                   )}
                 </ul>
               </div>

@@ -102,20 +102,6 @@ export interface DPlayer {
   date_updated: 'datetime';
 }
 
-export interface DUserMetaData {
-  id: string;
-  user_id: string;
-  api_token: string;
-  api_limit: number;
-}
-
-export interface DUser {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-}
-
 export interface DScrapStats {
   id: number;
   type: 'daily' | 'full';
@@ -129,14 +115,26 @@ export interface DConfigs {
   apiLimit: number;
 }
 
+export interface DAccount {
+  id: string;
+  google_account_id: string;
+  full_name: string;
+  email: string;
+  api_token: string;
+  api_limit: number;
+  google_img?: string;
+  date_created?: 'datetime';
+  date_updated?: 'datetime';
+}
+
 export interface DSchema {
   clubs: DClub[];
   leagues: DLeague[];
   nations: DNation[];
   players: DPlayer[];
   scrap_stats: DScrapStats[];
-  user_metadata: DUserMetaData[];
   cards: DCard[];
+  accounts: DAccount[];
   configs: DConfigs;
 }
 

@@ -9,8 +9,8 @@ export async function validateToken(directusAPI: DirectusAPI, token?: string | n
     return false;
   }
 
-  const metadata = await directusAPI.request(
-    readItems('user_metadata', {
+  const userAccounts = await directusAPI.request(
+    readItems('accounts', {
       filter: {
         api_token: { _eq: token },
         api_limit: { _gt: 0 },
@@ -18,7 +18,7 @@ export async function validateToken(directusAPI: DirectusAPI, token?: string | n
     }),
   );
 
-  return metadata.length > 0 ? true : false;
+  return userAccounts.length > 0 ? true : false;
 }
 
 export async function updateQuoata(directusAPI: DirectusAPI, token?: string | null): Promise<boolean> {
@@ -26,8 +26,8 @@ export async function updateQuoata(directusAPI: DirectusAPI, token?: string | nu
     return false;
   }
 
-  const metadata = await directusAPI.request(
-    readItems('user_metadata', {
+  const userAccounts = await directusAPI.request(
+    readItems('accounts', {
       filter: {
         api_token: { _eq: token },
         api_limit: { _gt: 0 },
@@ -35,14 +35,15 @@ export async function updateQuoata(directusAPI: DirectusAPI, token?: string | nu
     }),
   );
 
-  if (metadata.length <= 0) return false;
+  if (userAccounts.length <= 0) return false;
 
-  const user_metadata = metadata[0];
-  const new_quota = user_metadata.api_limit - 1;
-  const updated_metadata = await directusAPI.request(
-    updateItem('user_metadata', user_metadata.id, {
+  const userAccount = userAccounts[0];
+  const new_quota = userAccount.api_limit - 1;
+  await directusAPI.request(
+    updateItem('accounts', userAccount.id, {
       api_limit: new_quota,
     }),
   );
+
   return true;
 }

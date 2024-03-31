@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -29,9 +29,9 @@ export default function Home() {
                     Go to dashboard
                   </Link>
                 ) : (
-                  <Link href="/register" className="btn btn-lg btn-primary shadow">
-                    Create an account
-                  </Link>
+                  <button className="btn btn-lg btn-primary shadow" onClick={() => signIn('google')}>
+                    Login with Google
+                  </button>
                 )}
                 <Link href="/docs" className="btn btn-lg btn-primary-subtle">
                   API documentation

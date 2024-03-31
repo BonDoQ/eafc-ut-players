@@ -11,7 +11,8 @@ export default function Dashboard({ totalApiLimit }: Props) {
 
   const userApiToken = data?.user?.metadata?.api_token;
   const userApiLimit = data?.user?.metadata?.api_limit;
-  const fullname = `${data?.user?.first_name} ${data?.user?.last_name}`;
+  const fullname = data?.user?.metadata.full_name;
+
   return (
     <>
       <Head>

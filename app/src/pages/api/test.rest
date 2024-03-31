@@ -10,54 +10,54 @@ X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e88011
 
 ### Invalid request
 GET http://localhost:3000/api/v1/players/30000
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ### 
 GET http://localhost:3000/api/v1/players/1/20844
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 
 ### Valid request
 GET http://localhost:3000/api/v1/players/20844
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ### Valid Request
 GET http://localhost:3000/api/v1/players?page=2&limit=1
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 
 ### Valid request
 GET http://localhost:3000/api/v1/leagues
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ###
 GET http://localhost:3000/api/v1/leagues/1
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 
 ### Valid request
 GET http://localhost:3000/api/v1/nations
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ###
 GET http://localhost:3000/api/v1/nations/1
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 
 ### Valid request
 GET http://localhost:3000/api/v1/clubs
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ###
 GET http://localhost:3000/api/v1/clubs/266
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ### Valid request
 GET http://localhost:3000/api/v1/cards
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 ###
 GET http://localhost:3000/api/v1/cards/1
-X-AUTH-TOKEN: f521beaa-891b-4155-8a8f-40963e880119
+X-AUTH-TOKEN: eaa26004-02d3-4224-8d4f-df3ca9cf57ed
 
 
