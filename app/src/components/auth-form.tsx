@@ -40,7 +40,7 @@ export default function AuthForm({ title, buttonText, onSubmit, isFullForm = tru
       <div className="row">
         <div className="col-12 col-lg-6 mx-auto">
           <h2>Create an account</h2>
-          <form onSubmit={handleFormSubmit} className="d-flex flex-column gap-3 border p-2 mb-2 p-4 rounded-4 shadow">
+          <form onSubmit={handleFormSubmit} className="d-flex flex-column gap-3 border p-2 mb-2 p-4 shadow">
             <h1>{title}</h1>
             {isFullForm && (
               <>

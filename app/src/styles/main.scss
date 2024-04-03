@@ -1,7 +1,9 @@
 @use "sass:math";
 
+@import "./partials/brand";
 @import "./partials/bootstrap";
 @import "./partials/scaffolding";
+@import "./partials/extras";
 @import "./partials/swagger";
 
 // custom code

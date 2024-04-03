@@ -1,0 +1,23 @@
+.circle {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  left: calc(50% - 640px / 2);
+  top: -240px;
+
+  background: rgba($bright-green, 0.2);
+  filter: blur(240px);
+
+  z-index: -1;
+}
+
+.ball {
+  position: absolute;
+  width: 266px;
+  height: 267px;
+  left: calc(50% - 266px / 2);
+  top: -126px;
+  filter: drop-shadow(-27.0095px 4.00141px 51.0179px rgba(0, 0, 0, 0.25));
+
+  z-index: -1;
+}

@@ -22,16 +22,16 @@ export default function Dashboard({ totalApiLimit }: Props) {
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
-            <div className="bg-secondary-subtle p-5 rounded-4">
+            <div className="bg-secondary-subtle p-5">
               <h3 className="display-5 fw-bold text-body-emphasis">Welcome, {fullname}!</h3>
 
               <div className="mt-4">
                 <p>
-                  API token <code className="bg-success-subtle text-success px-2 py-1 rounded-2">{userApiToken}</code>
+                  API token <code className="bg-success-subtle text-success px-2 py-1">{userApiToken}</code>
                 </p>
                 <p>
                   API calls{' '}
-                  <code className="bg-warning-subtle text-warning px-2 py-1 rounded-2">
+                  <code className="bg-warning-subtle text-warning px-2 py-1">
                     {userApiLimit} / {totalApiLimit}
                   </code>
                 </p>
