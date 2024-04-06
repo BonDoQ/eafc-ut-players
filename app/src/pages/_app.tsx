@@ -24,7 +24,9 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <Navbar />
       <div className="circle"></div>
       <Image className="ball" src={ball} width={240} height={240} alt={'Adidas ball'} placeholder='blur' />
-      <Component {...pageProps} />
+      <div className="main">
+        <Component {...pageProps} />
+      </div>
       <GoogleAnalytics gaId="G-X6TT55NYB4" />
       <Footer />
     </SessionProvider>

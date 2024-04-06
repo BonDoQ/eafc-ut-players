@@ -14,7 +14,7 @@ function ApiDoc({ spec }: InferGetStaticPropsType<typeof getStaticProps>) {
         <title>EAFC 24 - Documentation</title>
       </Head>
 
-      <div className="swgr-dark">
+      <div className="swgr-dark mt-6">
         <SwaggerUI spec={spec} />
       </div>
     </>

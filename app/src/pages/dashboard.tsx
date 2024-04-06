@@ -23,7 +23,7 @@ export default function Dashboard({ totalApiLimit }: Props) {
         <div className="row">
           <div className="col-12">
             <div className="bg-secondary-subtle p-5">
-              <h3 className="display-5 fw-bold text-body-emphasis">Welcome, {fullname}!</h3>
+              <h3 className="display-5">Welcome, {fullname}!</h3>
 
               <div className="mt-4">
                 <p>

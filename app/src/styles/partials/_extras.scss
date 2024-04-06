@@ -1,3 +1,20 @@
+// footer at bottom with flexbox
+
+#__next {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 100vh;
+  align-self: stretch !important;
+
+  .main {
+    align-self: stretch !important;
+    flex: auto;
+  }
+}
+
+// End - footer at bottom with flexbox
+
 .circle {
   position: absolute;
   width: 640px;
