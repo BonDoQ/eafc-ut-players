@@ -12,7 +12,7 @@ const Navbar = () => {
     <div className="container">
       <div className="row g-0">
         <div className="col-12">
-          <div className="mt-3">
+          <div>
             <nav className="navbar navbar-expand">
               <Link className="navbar-brand" href="/">
                 <Image src="/images/logo.png" alt="logo" width="80" height="80" />
@@ -31,19 +31,14 @@ const Navbar = () => {
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav ms-auto gap-4">
                   <li className="nav-item">
-                    <Link className="nav-link" href="/">
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" href="/docs">
-                      Documentation
+                    <Link className="nav-link px-0" href="/docs">
+                      API documentation
                     </Link>
                   </li>
                   {isUser ? (
                     <>
                       <li className="nav-item">
-                        <Link className="nav-link" href="/dashboard">
+                        <Link className="nav-link px-0" href="/dashboard">
                           Dashboard
                         </Link>
                       </li>

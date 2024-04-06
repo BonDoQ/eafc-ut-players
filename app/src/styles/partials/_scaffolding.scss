@@ -6,6 +6,12 @@ body {
   font-display: swap;
 
   @include transition(all ease-in-out 0.2s);
+
+  font-size: 12px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 16px;
+  }
 }
 
 ::selection {
