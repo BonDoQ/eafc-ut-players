@@ -5,9 +5,9 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { DefaultSeo } from 'next-seo';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
-import ball from '/public/ball.png';
 import { SEO } from '@/seo';
-import '@/styles/main.scss';
+
+import ball from '/public/ball.png';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -24,3 +24,5 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     </SessionProvider>
   );
 }
+
+import '@/styles/main.scss';

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 
+import logo from '/public/images/logo.png';
+
 const Navbar = () => {
   const { data } = useSession();
   const isUser = !!data?.user;
@@ -15,7 +17,7 @@ const Navbar = () => {
           <div>
             <nav className="navbar navbar-expand">
               <Link className="navbar-brand" href="/">
-                <Image src="/images/logo.png" alt="logo" width="80" height="80" />
+                <Image src={logo} alt="logo" width="80" height="80" placeholder='blur' />
               </Link>
               <button
                 className="navbar-toggler"
