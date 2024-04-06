@@ -1,0 +1,61 @@
+// footer at bottom with flexbox
+
+#__next {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 100vh;
+  align-self: stretch !important;
+
+  .main {
+    align-self: stretch !important;
+    flex: auto;
+  }
+}
+
+// End - footer at bottom with flexbox
+
+.icon {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+.circle {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  left: calc(50% - 640px / 2);
+  top: -240px;
+
+  background: rgba($bright-green, 0.2);
+  filter: blur(240px);
+
+  z-index: -1;
+}
+
+.ball {
+  position: absolute;
+  width: 266px;
+  height: 267px;
+  left: calc(50% - 266px / 2);
+  top: -126px;
+  filter: drop-shadow(-27.0095px 4.00141px 51.0179px rgba(0, 0, 0, 0.25));
+
+  z-index: -1;
+}
+
+.card-stats {
+  overflow: hidden;
+  position: relative;
+  height: 20.5rem;
+
+  .icon {
+    position: absolute;
+    right: -30px;
+    bottom: -30px;
+    width: 8.25rem;
+    height: 8.25rem;
+  }
+}

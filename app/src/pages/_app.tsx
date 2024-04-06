@@ -1,14 +1,16 @@
 import type { AppProps } from 'next/app';
+import Image from 'next/image';
+import Head from 'next/head';
 import { SessionProvider } from 'next-auth/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import Navbar from '@/components/navbar';
 import Meta from '@/components/meta';
+import Footer from '@/components/footer';
+
+import ball from '/public/ball.png';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const bootstrap = 'bootstrap/dist/js/bootstrap';
-  useEffect(() => {
-    import('bootstrap');
-  }, []);
-
   return (
     <SessionProvider session={session}>
       <Head>
@@ -19,13 +21,15 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       </Head>
       <Meta title="EAFC 24 - " description="API for FC ultimate team 2024" />
       <Navbar />
-      <Component {...pageProps} />
+      <div className="circle"></div>
+      <Image className="ball" src={ball} width={240} height={240} alt={'Adidas ball'} placeholder="blur" />
+      <div className="main">
+        <Component {...pageProps} />
+      </div>
       <GoogleAnalytics gaId="G-X6TT55NYB4" />
+      <Footer />
     </SessionProvider>
   );
 }
 
 import '@/styles/main.scss';
-import { GoogleAnalytics } from '@next/third-parties/google';
-import Head from 'next/head';
-import { useEffect } from 'react';

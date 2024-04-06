@@ -1,0 +1,20 @@
+// custom
+$bright-green: #b6ff1c;
+$forest-green: #163300;
+
+@font-face {
+  font-family: 'Anton';
+  src: url('/anton.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-brand:
+  'Anton',
+  system-ui,
+  -apple-system,
+  'Inter',
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  'Noto Sans';
