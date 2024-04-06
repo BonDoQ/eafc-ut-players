@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import CardWhatYouGet from '@/components/card-what-you-get';
 import CardStats from '@/components/card-stats';
+import { Api, Ball, Cards, Database, Globe, Images, Players, Shield, Updates } from '@/components/icons';
 
 export default function Home() {
   const { data } = useSession();
@@ -56,18 +57,29 @@ export default function Home() {
           </div>
         </div>
         <div className="row">
-          <CardWhatYouGet title='Full Database'
-            description='comprehensive dataset of players, prices, nations, leagues, clubs, and card versions, freely accessible to everyone.
-            ' ></CardWhatYouGet>
+          <CardWhatYouGet
+            icon={<Database />}
+            title='Full Database'
+            description='comprehensive dataset of players, prices, nations, leagues, clubs, and card versions, freely accessible to everyone.'
+          />
 
-          <CardWhatYouGet title='API First' description='A comprehensive and user-friendly API along with up-to-date documentation. To get started, simply obtain your free API key by logging in with Google.
-' ></CardWhatYouGet>
+          <CardWhatYouGet
+            icon={<Api />}
+            title='API First'
+            description='A comprehensive and user-friendly API along with up-to-date documentation. To get started, simply obtain your free API key by logging in with Google.
+          ' />
 
-          <CardWhatYouGet title='Regular Updates' description='Our dataset undergoes updates at least daily, if not more frequently, ensuring near real-time synchronization with updates from the EA companion app.
-' ></CardWhatYouGet>
+          <CardWhatYouGet
+            icon={<Updates />}
+            title='Regular Updates'
+            description='Our dataset undergoes updates at least daily, if not more frequently, ensuring near real-time synchronization with updates from the EA companion app.
+          ' />
 
-          <CardWhatYouGet title='Player Images' description='Our dataset includes imagery for all players, nations, leagues, clubs, and card versions. This feature will soon be available on our API.
-' ></CardWhatYouGet>
+          <CardWhatYouGet
+            icon={<Images />}
+            title='Player Images'
+            description='Our dataset includes imagery for all players, nations, leagues, clubs, and card versions. This feature will soon be available on our API.
+          ' />
         </div>
       </section>
 
@@ -80,11 +92,11 @@ export default function Home() {
           </div>
         </div>
         <div className="row">
-          <CardStats metric='21.681' type='Players'></CardStats>
-          <CardStats metric='128' type='Cards'></CardStats>
-          <CardStats metric='212' type='Nations'></CardStats>
-          <CardStats metric='62' type='Leagues'></CardStats>
-          <CardStats metric='748' type='Clubs'></CardStats>
+          <CardStats metric='21.681' type='Players' icon={<Players/>} />
+          <CardStats metric='128' type='Cards' icon={<Cards/>} />
+          <CardStats metric='212' type='Nations' icon={<Globe/>} />
+          <CardStats metric='62' type='Leagues' icon={<Shield/>} />
+          <CardStats metric='748' type='Clubs' icon={<Ball/>} />
         </div>
       </section>
     </>
