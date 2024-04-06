@@ -14,10 +14,10 @@ const Meta: FC<Props> = ({ title, description }) => {
       openGraph={{
         title: title,
         description: description,
-        images: [{ url: "/og.png", }],
+        images: [{ url: '/og.png' }],
       }}
     />
-  )
-}
+  );
+};
 
-export default Meta
+export default Meta;

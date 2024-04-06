@@ -11,7 +11,6 @@ import Footer from '@/components/footer';
 import ball from '/public/ball.png';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-
   return (
     <SessionProvider session={session}>
       <Head>
@@ -23,7 +22,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <Meta title="EAFC 24 - " description="API for FC ultimate team 2024" />
       <Navbar />
       <div className="circle"></div>
-      <Image className="ball" src={ball} width={240} height={240} alt={'Adidas ball'} placeholder='blur' />
+      <Image className="ball" src={ball} width={240} height={240} alt={'Adidas ball'} placeholder="blur" />
       <div className="main">
         <Component {...pageProps} />
       </div>
