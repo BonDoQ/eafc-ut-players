@@ -40,7 +40,7 @@ export default function Home() {
                   </button>
                 )}
                 <Link href="/docs" className="btn btn-lg btn-primary-subtle">
-                  API documentation
+                  Documentation
                 </Link>
               </div>
             </div>
