@@ -10,7 +10,7 @@ const Footer: FC = () => {
       <div className="row">
         <div className="col-12">
           <Link className="navbar-brand" href="/">
-            <Image src={logo} alt="logo" width="80" height="80" placeholder='blur' className="mx-auto d-block mb-3" />
+            <Image src={logo} alt="logo" width="80" height="80" placeholder="blur" className="mx-auto d-block mb-3" />
           </Link>
         </div>
       </div>

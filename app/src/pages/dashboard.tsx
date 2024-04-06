@@ -1,6 +1,6 @@
-import { loadConfigs } from '@/lib/get-configs';
+import { getConfigs } from '@/lib/directus';
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 type Props = {
   totalApiLimit: number;
@@ -15,10 +15,7 @@ export default function Dashboard({ totalApiLimit }: Props) {
 
   return (
     <>
-      <Head>
-        <title>EAFC 24 - Dashboard</title>
-      </Head>
-
+      <NextSeo title="Dashboard" />
       <div className="container mt-5">
         <div className="row">
           <div className="col-12">
@@ -45,7 +42,7 @@ export default function Dashboard({ totalApiLimit }: Props) {
 }
 
 export async function getServerSideProps(): Promise<{ props: Props }> {
-  const { apiLimit } = await loadConfigs();
+  const { apiLimit } = await getConfigs();
 
   return { props: { totalApiLimit: apiLimit } };
 }

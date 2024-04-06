@@ -1,7 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { NextSeo } from 'next-seo';
 import { createSwaggerSpec } from 'next-swagger-doc';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 
 const SwaggerUI = dynamic<{
   spec: any;
@@ -10,10 +10,7 @@ const SwaggerUI = dynamic<{
 function ApiDoc({ spec }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Head>
-        <title>EAFC 24 - Documentation</title>
-      </Head>
-
+      <NextSeo title="Documentation" />
       <div className="swgr-dark mt-6">
         <SwaggerUI spec={spec} />
       </div>

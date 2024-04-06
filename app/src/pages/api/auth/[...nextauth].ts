@@ -2,8 +2,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { NextAuthOptions, Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import NextAuth from 'next-auth/next';
-import { upsertDirectusUserAccount } from '@/lib/directus-user';
-import { loadConfigs } from '@/lib/get-configs';
+import { getConfigs, upsertDirectusUserAccount } from '@/lib/directus';
 
 export const options: NextAuthOptions = {
   providers: [
@@ -18,7 +17,7 @@ export const options: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: any }) {
-      const dConfig = await loadConfigs();
+      const dConfig = await getConfigs();
       const dAccount = await upsertDirectusUserAccount({
         email: user?.email || token?.email,
         google_account_id: user?.id || token?.sub,

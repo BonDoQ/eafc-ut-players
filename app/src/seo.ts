@@ -9,7 +9,7 @@ const keywords =
 const logo = 'https://eafcdb.app/images/logo.png';
 
 export const SEO: DefaultSeoProps = {
-  title,
+  titleTemplate: `${title} | %s`,
   description,
   canonical,
   additionalLinkTags: [
