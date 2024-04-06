@@ -58,6 +58,25 @@
   position: relative;
   height: 20rem;
 
+  .bg-blur {
+    position: absolute;
+    width: 18rem;
+    height: 18rem;
+    left: -9rem;
+    top: -9rem;
+    z-index: -1;
+
+    /* blur */
+    filter: blur(64px);
+
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      $bright-green 0%,
+      rgba($bright-green, 0.6) 40%,
+      rgba($bright-green, 0) 100%
+    );
+  }
+
   .icon {
     position: absolute;
     right: -30px;

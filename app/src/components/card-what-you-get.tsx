@@ -9,7 +9,7 @@ interface Props {
 const CardWhatYouGet: FC<Props> = ({ icon, title, description }) => {
   return (
     <div className="col-12 col-md-6 d-flex">
-      <div className='border border-primary px-3 py-2 d-flex flex-column mt-3'>
+      <div className='border border-primary px-3 py-2 d-flex flex-column mt-3' style={{ "--bs-border-opacity": .2 } as React.CSSProperties} >
         <div className="text-primary display-1 m-0">{icon}</div>
         <div className="display-3 m-0">
           {title}

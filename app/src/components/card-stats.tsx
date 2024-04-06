@@ -10,7 +10,8 @@ const CardStats: FC<Props> = ({ icon, metric, type }) => {
   return (
     <div className="col-4 col-lg">
       <div className='border border-primary px-1 d-flex flex-column mt-3 card-stats'
-      style={{ "--bs-border-opacity": .2 } as React.CSSProperties} >
+      style={{ "--bs-border-opacity": .2 } as React.CSSProperties}>
+        <div className="bg-blur"></div>
         <h2 className="display-3 m-0">
           {metric}
         </h2>
