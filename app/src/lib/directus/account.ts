@@ -1,5 +1,5 @@
 import { createItem, readItems } from '@directus/sdk';
-import { DAccount, directus } from './directus';
+import { DAccount, directus } from '.';
 
 export const getDirectusUserAccount = async (email: string | undefined, sub: string | undefined) => {
   if (!email || !sub) {

@@ -5,9 +5,10 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { DefaultSeo } from 'next-seo';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
+import { inDevEnvironment } from '@/lib/utils';
 import { SEO } from '@/seo';
-
 import ball from '/public/ball.png';
+import '@/styles/main.scss';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -19,11 +20,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <div className="main">
         <Component {...pageProps} />
       </div>
-      <GoogleAnalytics gaId="G-X6TT55NYB4" />
+      {!inDevEnvironment && <GoogleAnalytics gaId="G-X6TT55NYB4" />}
+
       <Footer />
       <div className="circle bottom"></div>
     </SessionProvider>
   );
 }
-
-import '@/styles/main.scss';
