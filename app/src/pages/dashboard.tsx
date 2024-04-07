@@ -40,7 +40,12 @@ export default function Dashboard({ totalApiLimit }: Props) {
             API token
           </div>
           <div className="col-12 col-lg-6">
-            <div className='mt-1 mt-lg-0'><code className="border border-success-subtle bg-success-subtle text-success px-2 py-1 rounded-pill">{userApiToken}</code></div>
+            <div className='mt-1 mt-lg-0 d-flex gap-1 align-items-center'>
+              <code className="border border-success-subtle bg-success-subtle text-success px-2 py-1 rounded-pill">{userApiToken}</code>
+              <a href="#" className="btn btn-sm" onClick={(e) => {
+                navigator.clipboard.writeText(userApiToken!);
+              }}>Copy</a>
+            </div>
           </div>
         </div>
         <div className="row mt-3">

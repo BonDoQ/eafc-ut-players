@@ -15,7 +15,7 @@ export default function Home() {
         <title>EAFC 24 - Home</title>
       </Head>
 
-      <section className="container mt-6">
+      <section className="container mt-5 mt-lg-6">
         <div className="row">
           <div className="col-12 col-lg-10 mx-auto">
             <div className="pt-2">
@@ -48,10 +48,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container mt-7">
+      <section className="container mt-6 mt-lg-7">
         <div className="row">
           <div className="col">
-            <h1 className="display-1 mb-4 text-center">
+            <h1 className="display-1 mb-2 mb-lg-4 text-center">
               What you get
             </h1>
           </div>
@@ -83,10 +83,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container mt-7">
+      <section className="container mt-6 mt-lg-7">
         <div className="row">
           <div className="col">
-            <h1 className="display-1 mb-4 text-center">
+            <h1 className="display-1 mb-2 mb-lg-4 text-center">
               What you get
             </h1>
           </div>
