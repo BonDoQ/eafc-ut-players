@@ -14,7 +14,7 @@ export default function Home({ stats }: { stats: DStats }) {
   return (
     <>
       <NextSeo title="Home" />
-       <section className="container mt-5 mt-lg-6">
+      <section className="container mt-5 mt-lg-6">
         <div className="row">
           <div className="col-12 col-lg-10 mx-auto">
             <div className="pt-2">
@@ -89,13 +89,14 @@ export default function Home({ stats }: { stats: DStats }) {
             <h1 className="display-1 mb-2 mb-lg-4 text-center">
               What you get
             </h1>
-        </div>
-        <div className="row">
-          <CardStats metric={players} type="Players" icon={<Players />} />
-          <CardStats metric={cards} type="Cards" icon={<Cards />} />
-          <CardStats metric={nations} type="Nations" icon={<Globe />} />
-          <CardStats metric={leagues} type="Leagues" icon={<Shield />} />
-          <CardStats metric={clubs} type="Clubs" icon={<Ball />} />
+          </div>
+          <div className="row">
+            <CardStats metric={players} type="Players" icon={<Players />} />
+            <CardStats metric={cards} type="Cards" icon={<Cards />} />
+            <CardStats metric={nations} type="Nations" icon={<Globe />} />
+            <CardStats metric={leagues} type="Leagues" icon={<Shield />} />
+            <CardStats metric={clubs} type="Clubs" icon={<Ball />} />
+          </div>
         </div>
       </section>
     </>
