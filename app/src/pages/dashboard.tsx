@@ -16,24 +16,41 @@ export default function Dashboard({ totalApiLimit }: Props) {
   return (
     <>
       <NextSeo title="Dashboard" />
-      <div className="container mt-5">
-        <div className="row">
-          <div className="col-12">
-            <div className="bg-secondary-subtle p-5">
-              <h3 className="display-5">Welcome, {fullname}!</h3>
 
-              <div className="mt-4">
-                <p>
-                  API token <code className="bg-success-subtle text-success px-2 py-1">{userApiToken}</code>
-                </p>
-                <p>
-                  API calls{' '}
-                  <code className="bg-warning-subtle text-warning px-2 py-1">
-                    {userApiLimit} / {totalApiLimit}
-                  </code>
-                </p>
-              </div>
+      <div className="container mt-6">
+        <div className="row">
+          <div className="col-12 col-lg-8 mx-auto">
+            <h3 className="display-5">API token</h3>
+          </div>
+        </div>
+
+        <div className="row mt-3">
+          <div className="col-12 offset-lg-2 col-lg-2">
+            Authenticated as
+          </div>
+          <div className="col-12 col-lg-6">
+            <div className='mt-1 mt-lg-0'><code className="bg-info-subtle text-info px-2 py-1 rounded-pill">{fullname}</code></div>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-12 offset-lg-2 col-lg-2">
+            API token
+          </div>
+          <div className="col-12 col-lg-6">
+            <div className='mt-1 mt-lg-0 d-flex gap-1 align-items-center'>
+              <code className="border border-success-subtle bg-success-subtle text-success px-2 py-1 rounded-pill">{userApiToken}</code>
+              <a href="#" className="btn btn-sm" onClick={(e) => {
+                navigator.clipboard.writeText(userApiToken!);
+              }}>Copy</a>
             </div>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-12 offset-lg-2 col-lg-2">
+            API calls
+          </div>
+          <div className="col-12 col-lg-6">
+            <div className='mt-1 mt-lg-0'><code className="bg-warning-subtle text-warning px-2 py-1 rounded-pill">{userApiLimit} / {totalApiLimit}</code></div>
           </div>
         </div>
       </div>

@@ -31,10 +31,10 @@ const Navbar = () => {
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav ms-auto gap-4">
+                <ul className="navbar-nav ms-auto gap-3">
                   <li className="nav-item">
                     <Link className="nav-link px-0" href="/docs">
-                      API documentation
+                      Documentation
                     </Link>
                   </li>
                   {isUser ? (
@@ -44,11 +44,11 @@ const Navbar = () => {
                           Dashboard
                         </Link>
                       </li>
-                      {img && (
+                      {/* {img && (
                         <li className="nav-item">
-                          <Image src={img} alt="profile" width={38} height={38} />
+                          <Image src={img} alt="profile" className='rounded-pill' width={38} height={38} />
                         </li>
-                      )}
+                      )} */}
                       <li className="nav-item">
                         <button className="btn btn btn-outline-light" onClick={() => signOut({ callbackUrl: '/' })}>
                           Logout

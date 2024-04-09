@@ -15,7 +15,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     <SessionProvider session={session}>
       <DefaultSeo {...SEO} />
       <Navbar />
-      <div className="circle"></div>
+      <div className="circle top"></div>
       <Image className="ball" src={ball} width={240} height={240} alt={'Adidas ball'} placeholder="blur" />
       <div className="main">
         <Component {...pageProps} />
@@ -23,6 +23,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       {!inDevEnvironment && <GoogleAnalytics gaId="G-X6TT55NYB4" />}
 
       <Footer />
+      <div className="circle bottom"></div>
     </SessionProvider>
   );
 }
