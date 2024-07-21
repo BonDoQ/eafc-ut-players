@@ -11,6 +11,7 @@ export interface DSchema {
 export interface DPlayer {
   id: number;
   fullname?: string;
+  path?: string;
   club_id?: number;
   nation_id?: number;
   league_id?: number;

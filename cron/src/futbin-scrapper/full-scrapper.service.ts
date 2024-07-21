@@ -21,7 +21,8 @@ export class FullScrapperService {
       const callback: IPlayerCallback = (els) => els.map((el) => el.getAttribute('data-site-id'));
       const ids = await multiValueHtmlScrapper(futbinUrl, selector, callback);
 
-      await this.directusService.addPlayerIds(ids);
+      // TODO: Uncomment this line
+      // await this.directusService.addPlayers(ids);
       await this.directusService.updateScrapStats({
         type: 'full',
         current_page: i,

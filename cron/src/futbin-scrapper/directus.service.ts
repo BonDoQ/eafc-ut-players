@@ -112,13 +112,8 @@ export class DirectusService {
     }
   }
 
-  public async addPlayerIds(ids: string[]) {
-    return await this.directusClient.request<DPlayer[] | null>(
-      createItems(
-        'players',
-        ids.map((id) => ({ id: +id })),
-      ),
-    );
+  public async addPlayers(players: Partial<DPlayer>[]) {
+    return await this.directusClient.request<DPlayer[] | null>(createItems('players', players));
   }
 
   public async countNonEnrichedPlayers(key: string = 'fullname'): Promise<number> {

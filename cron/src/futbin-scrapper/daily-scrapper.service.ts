@@ -16,16 +16,17 @@ export class DailyScrapperService {
       this.logger.log(`Scraping page: ${page} for new players`);
 
       const futbinUrl = `https://www.futbin.com/latest?page=${page}`;
-      const selector = '.table-new-players tbody tr';
+      const selector = 'tr.player-row';
 
       const callback: IPlayerCallback = (els) =>
         els.map((el) => {
-          const playerId = el.querySelector('.get-tp')?.getAttribute('data-site-id');
+          const playerId = el.querySelector('.table-player-info a')?.getAttribute('href').split('/')[3];
+          const playerPath = el.querySelector('.table-player-info a')?.getAttribute('href');
           const addedDate = el.querySelector('td:last-child')?.textContent;
-          return { playerId, addedDate };
+          return { playerId, playerPath, addedDate };
         });
 
-      const newPlayers: { playerId: string; addedDate: string }[] = await multiValueHtmlScrapper(
+      const newPlayers: { playerId: string; playerPath: string; addedDate: string }[] = await multiValueHtmlScrapper(
         futbinUrl,
         selector,
         callback,
@@ -33,9 +34,12 @@ export class DailyScrapperService {
 
       const filteredNewPlayers = newPlayers
         .filter((player) => player.addedDate && new Date(player.addedDate) >= lastRun)
-        .map((player) => player.playerId);
+        .map((player) => ({
+          id: +player.playerId,
+          path: player.playerPath,
+        }));
 
-      await this.directusService.addPlayerIds(filteredNewPlayers);
+      await this.directusService.addPlayers(filteredNewPlayers);
       this.logger.log(
         `Added ${filteredNewPlayers.length} new players from page: ${page} with total Players of ${newPlayers.length} players.`,
       );
