@@ -12,8 +12,8 @@ export class PlayerHTMLScrapperService {
 
   constructor(private readonly directusService: DirectusService) {}
 
-  public async scrapPlayerHTML(playerId: number) {
-    const futbinUrl = `https://www.futbin.com/24/player/${playerId}`;
+  public async scrapPlayerHTML(playerId: number, playerPath: string) {
+    const futbinUrl = `https://www.futbin.com${playerPath}`;
     const browser = await webkit.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -34,7 +34,8 @@ export class PlayerHTMLScrapperService {
         }
       }
 
-      const prices = await getPlayerPrice(playerId);
+      // const prices = await getPlayerPrice(playerId);
+      const prices = { ps: 0, pc: 0 };
 
       player['ps_price'] = prices.ps;
       player['pc_price'] = prices.pc;
@@ -47,10 +48,10 @@ export class PlayerHTMLScrapperService {
     }
   }
 
-  public async scrapBatchPlayersHTML(players) {
+  public async scrapBatchPlayersHTML(players: DPlayer[]) {
     for await (const player of players) {
       try {
-        await this.scrapPlayerHTML(player.id);
+        await this.scrapPlayerHTML(player.id, player.path);
         await scrapSleep(50, 150);
       } catch (error) {
         this.directusService.enrichPlayer(player.id, { date_updated: '$NOW' as any });
@@ -59,11 +60,11 @@ export class PlayerHTMLScrapperService {
     }
   }
 
-  public async scrapBatchPlayersHTMLWithSpeed(players) {
+  public async scrapBatchPlayersHTMLWithSpeed(players: DPlayer[]) {
     const playersAll = [];
     for await (const player of players) {
       try {
-        playersAll.push(this.scrapPlayerHTML(player.id));
+        playersAll.push(this.scrapPlayerHTML(player.id, player.path));
         await scrapSleep(1000, 2500);
       } catch (error) {
         this.directusService.enrichPlayer(player.id, { date_updated: '$NOW' as any });

@@ -138,7 +138,7 @@ export class DirectusService {
         filter: {
           [key]: { _null: true },
         },
-        fields: ['id'],
+        fields: ['id', 'path'],
         sort: 'date_updated',
         limit,
       }),
