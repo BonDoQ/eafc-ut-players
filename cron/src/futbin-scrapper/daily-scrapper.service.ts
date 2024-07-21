@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { IPlayerCallback, multiValueHtmlScrapper } from './helpers/utils';
 import { DirectusService } from './directus.service';
+import pMap from 'p-map';
 
 @Injectable()
 export class DailyScrapperService {
@@ -87,7 +88,8 @@ export class DailyScrapperService {
       }))
       .filter((cardVersion) => !currentCardVersions.find((current) => current.id === cardVersion.id));
 
-    await Promise.all(diff.map(async (cardVersion) => await this.directusService.upsertCardVersion(cardVersion)));
+    const updater = async (cardVersion) => await this.directusService.upsertCardVersion(cardVersion);
+    await pMap(diff, updater, { concurrency: 5 });
 
     this.logger.log(`${diff.length} Cards Versions updated!`);
   }

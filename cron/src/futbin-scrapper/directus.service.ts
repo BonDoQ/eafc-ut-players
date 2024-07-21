@@ -209,6 +209,6 @@ export class DirectusService {
   }
 
   public async getAllCardVersions() {
-    return await this.directusClient.request<DCard[]>(readItems('cards', { fields: ['id'] }));
+    return await this.directusClient.request<DCard[]>(readItems('cards', { fields: ['id'], limit: 200 }));
   }
 }

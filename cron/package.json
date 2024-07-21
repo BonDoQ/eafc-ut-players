@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@types/pretty-hrtime": "^1.0.3",
     "nest-commander": "^3.12.5",
+    "p-map": "^4.0.0",
     "playwright": "^1.42.1",
     "pretty-hrtime": "^1.0.3",
     "reflect-metadata": "^0.1.13",
