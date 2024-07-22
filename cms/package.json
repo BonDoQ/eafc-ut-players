@@ -8,7 +8,7 @@
     "boostrap:local": "dotenv -e .env npx directus bootstrap"
   },
   "engines": {
-    "node": ">=18"
+    "node": "^20"
   },
   "dependencies": {
     "directus": "^10.10.3",
