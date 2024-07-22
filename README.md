@@ -14,5 +14,3 @@ This repository is a monorepo for 3 components used to build the API
 
 CRON TO FIX:
 Player Image - CDN 403 again
-Player Price - CDN 403 again
-FIX Keeper Stats - Selectors

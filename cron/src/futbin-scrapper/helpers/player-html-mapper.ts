@@ -11,6 +11,15 @@ const basicParser = (selector: string, type: 'string' | 'number') => async (page
   }
 };
 
+const statParser = (stat: string) => {
+  return basicParser(`.player-stat-row:has(.player-stat-name:text("${stat}")) >> .player-stat-value`, 'number');
+};
+
+const priceParser = (selector: string) => async (page) => {
+  const price = await basicParser(selector, 'string')(page);
+  return parseInt(price.replace(/,/g, ''), 10);
+};
+
 const dateOfBirthParser = async (page: Page) => {
   try {
     const date = await page.$eval(
@@ -93,9 +102,6 @@ type IPlayerMapper<T> = {
   [p in keyof T]?: (page: Page) => Promise<any>;
 };
 
-const statParser = (stat) =>
-  basicParser(`.player-stat-row:has(.player-stat-name:text("${stat}")) >> .player-stat-value`, 'number');
-
 export const PlayerHTMLScrapper: IPlayerMapper<DPlayer> = {
   fullname: basicParser('.narrow-table tr:has(th:text("Name")) >> td', 'string'),
   club_id: basicParser('.narrow-table tr:has(th:text("Club ID")) >> td', 'number'),
@@ -156,29 +162,15 @@ export const PlayerHTMLScrapper: IPlayerMapper<DPlayer> = {
 };
 
 export const KeeperHTMLScrapper: IPlayerMapper<DPlayer> = {
-  // gk_overall_diving: basicParser('#main-gkdiving-val-0 .stat_val', 'number'),
-  // gk_overall_handling: basicParser('#main-gkhandling-val-0 .stat_val', 'number'),
-  // gk_overall_kicking: basicParser('#main-gkkicking-val-0 .stat_val', 'number'),
-  // gk_overall_reflexes: basicParser('#main-gkreflexes-val-0 .stat_val', 'number'),
-  // gk_overall_speed: basicParser('#main-speed-val-0 .stat_val', 'number'),
-  // gk_overall_positioning: basicParser('#main-gkpositioning-val-0 .stat_val', 'number'),
+  gk_overall_diving: statParser('Diving'),
+  gk_overall_handling: statParser('Handling'),
+  gk_overall_kicking: statParser('Kicking'),
+  gk_overall_reflexes: statParser('Reflexes'),
+  gk_overall_speed: statParser('Speed'),
+  gk_overall_positioning: statParser('Positioning'),
 };
 
-export const getPlayerPrice = async (id: number) => {
-  const headers = {
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'en-US,en;q=0.9',
-    Connection: 'keep-alive',
-    'User-Agent': 'Futbin/6.2.4 (iPhone; iOS 17.4; Scale/3.00)',
-  };
-
-  const url = `https://www.futbin.com/24/getTp?pid=${id}&type=player`;
-  const res = await fetch(url, { headers });
-
-  const { data } = await res.json();
-
-  return {
-    ps: data.p[0],
-    pc: data.p[2],
-  };
+export const PriceHTMLScrapper: IPlayerMapper<DPlayer> = {
+  ps_price: priceParser('.player-header-prices-section >> .price-box.player-price-not-pc>>nth=-1 >> .lowest-price-1'),
+  pc_price: priceParser('.player-header-prices-section >> .price-box.player-price-not-ps>>nth=-1 >> .lowest-price-1'),
 };

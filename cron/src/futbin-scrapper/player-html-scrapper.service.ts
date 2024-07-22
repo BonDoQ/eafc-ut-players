@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { webkit } from 'playwright';
 import prettyHrtime from 'pretty-hrtime';
-import { KeeperHTMLScrapper, PlayerHTMLScrapper, getPlayerPrice } from './helpers/player-html-mapper';
+import { KeeperHTMLScrapper, PlayerHTMLScrapper, PriceHTMLScrapper } from './helpers/player-html-mapper';
 import { scrapSleep } from './helpers/utils';
 import { DirectusService } from './directus.service';
 import { DPlayer } from './helpers/directus.schema';
@@ -34,11 +34,9 @@ export class PlayerHTMLScrapperService {
         }
       }
 
-      // const prices = await getPlayerPrice(playerId);
-      const prices = { ps: 0, pc: 0 };
-
-      player['ps_price'] = prices.ps;
-      player['pc_price'] = prices.pc;
+      for await (const [property, selector] of Object.entries(PriceHTMLScrapper)) {
+        player[property] = await selector(page);
+      }
 
       return await this.directusService.enrichPlayer(playerId, { id: playerId, ...player });
     } catch (error) {
