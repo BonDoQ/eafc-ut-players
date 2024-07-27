@@ -92,4 +92,8 @@ export class PlayerHTMLScrapperService {
       );
     }
   }
+
+  public async ScrapOnePlayer(playerId: number, playerPath: string) {
+    return await this.scrapPlayerHTML(playerId, playerPath);
+  }
 }

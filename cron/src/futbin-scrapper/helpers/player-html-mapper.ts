@@ -80,7 +80,9 @@ const genderParser = async (page: Page) => {
 
 const cardVersionParser = async (page: Page) => {
   try {
-    const url = await page.$eval('.player-card-wrapper:not([hidden]) >> img>>nth=0', (el) => el.getAttribute('src'));
+    const url = await page.$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-bg', (el) =>
+      el.getAttribute('src'),
+    );
     return url.split('?')[0].split('%2F').reverse()[0].split('.')[0];
   } catch (error) {
     return null;
@@ -89,8 +91,15 @@ const cardVersionParser = async (page: Page) => {
 
 const imgParser = async (page: Page) => {
   try {
-    const url = await page.$eval('.player-card-wrapper:not([hidden]) >> img>>nth=1', (el) => el.getAttribute('src'));
-    // return decodeURIComponent(url.split('/').reverse()[0]);
+    const baseImageUrl = await page.$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-base-img', (el) =>
+      el.getAttribute('src'),
+    );
+    const specialImageUrl = await page.$eval(
+      '.player-card-wrapper:not([hidden]) >> img.playercard-24-special-img',
+      (el) => el.getAttribute('src'),
+    );
+    const url = specialImageUrl || baseImageUrl;
+
     return decodeURIComponent(url.split('/').reverse()[0]).split('?')[0];
   } catch (error) {
     console.log(error);
