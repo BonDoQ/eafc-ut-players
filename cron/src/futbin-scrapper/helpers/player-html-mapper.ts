@@ -91,12 +91,20 @@ const cardVersionParser = async (page: Page) => {
 
 const imgParser = async (page: Page) => {
   try {
+    const playerId = parseInt(page.url().split('/').reverse()[1], 10);
+
     const baseImageUrl = await page
-      .$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-base-img', (el) => el.getAttribute('src'))
+      .$eval(`.player-card-wrapper[data-id='${playerId}'] >> img.playercard-24-base-img`, (el) =>
+        el.getAttribute('src'),
+      )
       .catch(() => null);
+
     const specialImageUrl = await page
-      .$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-special-img', (el) => el.getAttribute('src'))
+      .$eval(`.player-card-wrapper[data-id='${playerId}'] >> img.playercard-24-special-img`, (el) =>
+        el.getAttribute('src'),
+      )
       .catch(() => null);
+
     const url = specialImageUrl || baseImageUrl;
 
     return url ? decodeURIComponent(url.split('/').reverse()[0]).split('?')[0] : null;
