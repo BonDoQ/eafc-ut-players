@@ -91,16 +91,15 @@ const cardVersionParser = async (page: Page) => {
 
 const imgParser = async (page: Page) => {
   try {
-    const baseImageUrl = await page.$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-base-img', (el) =>
-      el.getAttribute('src'),
-    );
-    const specialImageUrl = await page.$eval(
-      '.player-card-wrapper:not([hidden]) >> img.playercard-24-special-img',
-      (el) => el.getAttribute('src'),
-    );
+    const baseImageUrl = await page
+      .$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-base-img', (el) => el.getAttribute('src'))
+      .catch(() => null);
+    const specialImageUrl = await page
+      .$eval('.player-card-wrapper:not([hidden]) >> img.playercard-24-special-img', (el) => el.getAttribute('src'))
+      .catch(() => null);
     const url = specialImageUrl || baseImageUrl;
 
-    return decodeURIComponent(url.split('/').reverse()[0]).split('?')[0];
+    return url ? decodeURIComponent(url.split('/').reverse()[0]).split('?')[0] : null;
   } catch (error) {
     console.log(error);
     return null;
